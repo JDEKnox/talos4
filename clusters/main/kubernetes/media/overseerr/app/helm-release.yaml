@@ -82,6 +82,10 @@ spec:
               enabled: true
             src:
               enabled: true
+      plex-media:
+        enabled: true
+        existingClaim: plex-media-pvc
+        mountPath: /mnt
       # config:
       #   enabled: true
       #   mountPath: "/app/config"
