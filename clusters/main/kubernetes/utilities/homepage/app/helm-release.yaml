@@ -232,4 +232,4 @@ spec:
                   enabled: true
                   certificateIssuer: domain-0-le-prod
               hosts:
-                - host: homepage.codeserver.lcdknox.net
+                - host: homepage.codeserver.${DOMAIN_0}
