@@ -50,11 +50,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: overseerr2.${DOMAIN_0}
+          - host: overseerr.${DOMAIN_0}
         tls:
           - hosts:
-              - overseerr2.${DOMAIN_0}
-            secretName: overseerr2-talos4-tls
+              - overseerr.${DOMAIN_0}
+            secretName: overseerr-talos4-tls
         integrations:
           certManager:
             enabled: true

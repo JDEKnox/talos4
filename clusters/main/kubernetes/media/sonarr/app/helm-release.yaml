@@ -120,11 +120,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: sonarr2.${DOMAIN_0}
+          - host: sonarr.${DOMAIN_0}
         tls:
           - hosts:
-              - sonarr2.${DOMAIN_0}
-            secretName: sonarr2-talos4-tls
+              - sonarr.${DOMAIN_0}
+            secretName: sonarr-talos4-tls
         integrations:
           certManager:
             enabled: true

@@ -151,11 +151,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: radarr2.${DOMAIN_0}
+          - host: radarr.${DOMAIN_0}
         tls:
           - hosts:
-              - radarr2.${DOMAIN_0}
-            secretName: radarr2-talos4-tls
+              - radarr.${DOMAIN_0}
+            secretName: radarr-talos4-tls
         integrations:
           certManager:
             enabled: true
@@ -184,4 +184,4 @@ spec:
                   enabled: true
                   certificateIssuer: domain-0-le-prod
               hosts:
-                - host: radarr2.codeserver.${DOMAIN_0}
+                - host: radarr.codeserver.${DOMAIN_0}

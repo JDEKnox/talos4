@@ -152,11 +152,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: prowlarr2.${DOMAIN_0}
+          - host: prowlarr.${DOMAIN_0}
         tls:
           - hosts:
-              - prowlarr2.${DOMAIN_0}
-            secretName: prowlarr2-talos4-tls
+              - prowlarr.${DOMAIN_0}
+            secretName: prowlarr-talos4-tls
         integrations:
           certManager:
             enabled: false
