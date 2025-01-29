@@ -31,6 +31,14 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    credentials:
+      s3v2:
+        type: s3
+        url: "${S3_URL}" #"https://s3.amazonaws.com"
+        bucket: "${S3_BUCKET_PREFIX}-radarr"
+        accessKey: "${S3_KEY_ID}"
+        secretKey: "${S3_SECRET_KEY}"
+        encrKey: "${S3_SECRET_KEY}"
     workload:
       main:
         podSpec:
@@ -52,13 +60,31 @@ spec:
             enabled: true
             certificateIssuer: domain-0-le-prod
     persistence:
+      # config:
+      #   volsync:
+      #   - name: config
+      #     type: restic
+      #     cleanupTempPVC: true
+      #     cleanupCachePVC: true
+      #     credentials: s3v2
+      #     dest:
+      #       enabled: true
+      #     src:
+      #       enabled: true
+      #       trigger:
+      #         schedule: 10 * * * *
       config:
-        enabled: true
-        mountPath: "/app/config"
-      plex-media:
-        enabled: true
-        existingClaim: plex-media-pvc
-        mountPath: /mnt
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      # config:
+      #   enabled: true
+      #   mountPath: "/app/config"
     portal:
       open:
         enabled: true

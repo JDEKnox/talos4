@@ -98,19 +98,28 @@ spec:
                 # ENABLE_UNKNOWN_QUEUE_ITEMS: false
                 CONFIG: "/config/config.xml"
     persistence:
+      # config:
+      #   volsync:
+      #   - name: config
+      #     type: restic
+      #     cleanupTempPVC: true
+      #     cleanupCachePVC: true
+      #     credentials: s3v2
+      #     dest:
+      #       enabled: true
+      #     src:
+      #       enabled: true
+      #       trigger:
+      #         schedule: 10 * * * *
       config:
         volsync:
-        - name: config
-          type: restic
-          cleanupTempPVC: true
-          cleanupCachePVC: true
-          credentials: s3v2
-          dest:
-            enabled: true
-          src:
-            enabled: true
-            trigger:
-              schedule: 10 * * * *
+          - name: config
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
       # config:
       #   enabled: true
       #   targetSelector:
