@@ -1,0 +1,235 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: homepage
+  namespace: utilities
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: homepage
+      version: 9.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    credentials:
+      s3v2:
+        type: s3
+        url: "${S3_URL}" #"https://s3.amazonaws.com"
+        bucket: "${S3_BUCKET_PREFIX}-{{ .Chart.Name }}"
+        accessKey: "${S3_KEY_ID}"
+        secretKey: "${S3_SECRET_KEY}"
+        encrKey: "${S3_SECRET_KEY}"
+    workload:
+      main:
+        podSpec:
+          automountServiceAccountToken: true
+          initContainers:
+            init-config:
+              enabled: true
+              type: init
+              imageSelector: alpineImage
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  mkdir -p /app/config
+                  if [ ! -f /app/config/bookmarks.yaml ]; then
+                    echo "Bookmarks file not found, copying dummy..."
+                    cp /dummy-config/bookmarks.yaml /app/config/bookmarks.yaml
+                    echo "Config file copied, you can now edit it at /app/config/bookmarks.yaml"
+                  fi
+                  if [ ! -f /app/config/services.yaml ]; then
+                    echo "services file not found, copying dummy..."
+                    cp /dummy-config/services.yaml /app/config/services.yaml
+                    echo "Config file copied, you can now edit it at /app/config/services.yaml"
+                  fi
+                  if [ ! -f /app/config/settings.yaml ]; then
+                    echo "settings file not found, copying dummy..."
+                    cp /dummy-config/settings.yaml /app/config/settings.yaml
+                    echo "Config file copied, you can now edit it at /app/config/settings.yaml"
+                  fi
+                  if [ ! -f /app/config/widgets.yaml ]; then
+                    echo "widgets file not found, copying dummy..."
+                    cp /dummy-config/widgets.yaml /app/config/widgets.yaml
+                    echo "Config file copied, you can now edit it at /app/config/widgets.yaml"
+                  fi
+                  if [ ! -f /app/config/custom.css ]; then
+                    echo "custom.css file not found, copying dummy..."
+                    cp /dummy-config/custom.css /app/config/custom.css
+                    echo "Config file copied, you can now edit it at /app/config/custom.css"
+                  fi
+                  if [ ! -f /app/config/custom.js ]; then
+                    echo "custom.js file not found, copying dummy..."
+                    cp /dummy-config/custom.js /app/config/custom.js
+                    echo "Config file copied, you can now edit it at /app/config/custom.js"
+                  fi
+    service:
+      main:
+        ports:
+          main:
+            port: 10352
+            protocol: http
+            targetPort: 3000
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      # config:
+      #   enabled: true
+      #   mountPath: /app/config
+      #   targetSelector:
+      #     main:
+      #       main: {}
+      #       init-config: {}
+      kubernetes-config:
+        enabled: true
+        mountPath: /app/config/kubernetes.yaml
+        subPath: kubernetes.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+      bookmarks-config:
+        # Only enable when not using forceConfigFromValues
+        enabled: "{{ not .Values.forceConfigFromValues }}"
+        mountPath: /dummy-config/bookmarks.yaml
+        subPath: bookmarks.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+        targetSelector:
+          main:
+            init-config: {}
+      force-bookmarks-config:
+        # Only enable when using forceConfigFromValues
+        enabled: "{{ .Values.forceConfigFromValues }}"
+        mountPath: /app/config/bookmarks.yaml
+        subPath: bookmarks.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+      settings-config:
+        # Only enable when not using forceConfigFromValues
+        enabled: "{{ not .Values.forceConfigFromValues }}"
+        mountPath: /dummy-config/settings.yaml
+        subPath: settings.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+        targetSelector:
+          main:
+            init-config: {}
+      force-settings-config:
+        # Only enable when using forceConfigFromValues
+        enabled: "{{ .Values.forceConfigFromValues }}"
+        mountPath: /app/config/settings.yaml
+        subPath: settings.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+      services-config:
+        # Only enable when not using forceConfigFromValues
+        enabled: "{{ not .Values.forceConfigFromValues }}"
+        mountPath: /dummy-config/services.yaml
+        subPath: services.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+        targetSelector:
+          main:
+            init-config: {}
+      force-services-config:
+        # Only enable when using forceConfigFromValues
+        enabled: "{{ .Values.forceConfigFromValues }}"
+        mountPath: /app/config/services.yaml
+        subPath: services.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+      widgets-config:
+        # Only enable when not using forceConfigFromValues
+        enabled: "{{ not .Values.forceConfigFromValues }}"
+        mountPath: /dummy-config/widgets.yaml
+        subPath: widgets.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+        targetSelector:
+          main:
+            init-config: {}
+      force-widgets-config:
+        # Only enable when using forceConfigFromValues
+        enabled: "{{ .Values.forceConfigFromValues }}"
+        mountPath: /app/config/widgets.yaml
+        subPath: widgets.yaml
+        readOnly: true
+        type: "configmap"
+        objectName: config
+      custom-css-config:
+        # Only enable when not using forceConfigFromValues
+        enabled: "{{ not .Values.forceConfigFromValues }}"
+        mountPath: /dummy-config/custom.css
+        subPath: custom.css
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: homepage.${DOMAIN_0}
+        tls:
+          - hosts:
+              - homepage.${DOMAIN_0}
+            secretName: homepage-talos4-tls
+        integrations:
+          certManager:
+            enabled: false
+            certificateIssuer: domain-0-le-prod
+
+    #### CodeServer Section
+    addons:
+          codeserver:
+            # -- Enable running a code-server container in the pod
+            enabled: true
+
+            service:
+            # -- Enable a service for the code-server add-on.
+                type: ClusterIP
+    #            loadBalancerIP: "192.168.178.11"
+                # Specify the default port information
+                ports:
+                    codeserver:
+                      port: 12321
+
+            ingress:
+              # -- Enable an ingress for the code-server add-on.
+              enabled: true
+              integrations:
+                certManager:
+                  enabled: true
+                  certificateIssuer: domain-0-le-prod
+              hosts:
+                - host: homepage.codeserver.lcdknox.net
