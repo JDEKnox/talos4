@@ -39,18 +39,14 @@ spec:
         accessKey: "${S3_KEY_ID}"
         secretKey: "${S3_SECRET_KEY}"
         encrKey: "${S3_SECRET_KEY}"
-    workload:
+    strategy:
+      type: Recreate
+    service:
       main:
-        podSpec:
-          containers:
-            main:
-              probes:
-                liveness:
-                  type: tcp
-                readiness:
-                  type: tcp
-                startup:
-                  type: tcp
+        ports:
+          main:
+            port: 10030
+            targetPort: 80
     persistence:
       config:
         volsync:
@@ -61,9 +57,6 @@ spec:
               enabled: true
             src:
               enabled: true
-      # config:
-      #   enabled: true
-      #   mountPath: "/config"
       data:
         enabled: true
         mountPath: "/data"
@@ -82,6 +75,18 @@ spec:
         allowPrivilegeEscalation: true
         runAsUser: 0
         runAsGroup: 0
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              probes:
+                liveness:
+                  type: tcp
+                readiness:
+                  type: tcp
+                startup:
+                  type: tcp
     ingress:
       main:
         enabled: true
@@ -95,3 +100,62 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+
+
+
+    # workload:
+    #   main:
+    #     podSpec:
+    #       containers:
+    #         main:
+    #           probes:
+    #             liveness:
+    #               type: tcp
+    #             readiness:
+    #               type: tcp
+    #             startup:
+    #               type: tcp
+    # persistence:
+    #   config:
+    #     volsync:
+    #       - name: config
+    #         type: restic
+    #         credentials: s3v2
+    #         dest:
+    #           enabled: true
+    #         src:
+    #           enabled: true
+    #   # config:
+    #   #   enabled: true
+    #   #   mountPath: "/config"
+    #   data:
+    #     enabled: true
+    #     mountPath: "/data"
+    #   varrun:
+    #     enabled: false
+    # portal:
+    #   open:
+    #     enabled: true
+    # securityContext:
+    #   container:
+    #     capabilities:
+    #       add:
+    #         - NET_RAW
+    #     readOnlyRootFilesystem: false
+    #     runAsNonRoot: false
+    #     allowPrivilegeEscalation: true
+    #     runAsUser: 0
+    #     runAsGroup: 0
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     hosts:
+    #       - host: smokeping.${DOMAIN_0}
+    #     tls:
+    #       - hosts:
+    #           - smokeping.${DOMAIN_0}
+    #         secretName: smokeping-talos4-tls
+    #     integrations:
+    #       certManager:
+    #         enabled: true
+    #         certificateIssuer: domain-0-le-prod
