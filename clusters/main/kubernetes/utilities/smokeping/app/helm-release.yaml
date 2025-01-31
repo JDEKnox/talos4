@@ -39,14 +39,6 @@ spec:
         accessKey: "${S3_KEY_ID}"
         secretKey: "${S3_SECRET_KEY}"
         encrKey: "${S3_SECRET_KEY}"
-    strategy:
-      type: Recreate
-    service:
-      main:
-        ports:
-          main:
-            port: 10030
-            targetPort: 80
     persistence:
       config:
         volsync:
