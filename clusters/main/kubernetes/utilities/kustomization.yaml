@@ -4,3 +4,4 @@ resources:
   - cyberchef/ks.yaml
   - homepage/ks.yaml
   - smokeping/ks.yaml
+  - smokeping2/ks.yaml
