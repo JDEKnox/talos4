@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - cyberchef/ks.yaml
   - homepage/ks.yaml
-  - smokeping2/ks.yaml
+  - smokeping2/ks.yaml  - localai4
+  - localai4/ks.yaml
