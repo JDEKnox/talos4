@@ -144,11 +144,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: cyberchef.${DOMAIN_0}
+          - host: localai.${DOMAIN_0}
         tls:
           - hosts:
-              - cyberchef.${DOMAIN_0}
-            secretName: cyberchef-talos4-tls
+              - localai.${DOMAIN_0}
+            secretName: localai-talos4-tls
         integrations:
           certManager:
             enabled: false
