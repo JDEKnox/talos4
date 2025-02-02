@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - cyberchef/ks.yaml
   - homepage/ks.yaml
-  - ollama-v1/ks.yaml
   - ollama-v2/ks.yaml
