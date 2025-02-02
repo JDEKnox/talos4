@@ -4,3 +4,4 @@ resources:
   - cyberchef/ks.yaml
   - homepage/ks.yaml
   - ollama-v2/ks.yaml
+  - ollama-v3/ks.yaml
