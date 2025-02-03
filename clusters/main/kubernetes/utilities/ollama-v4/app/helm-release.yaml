@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: ollama-v3
+  name: ollama-v4
   namespace: utilities
 spec:
   interval: 15m
@@ -40,26 +40,26 @@ spec:
         secretKey: "${S3_SECRET_KEY}"
         encrKey: "${S3_SECRET_KEY}"
     workload:
-      # main:
-      #   podSpec:
-      #     containers:
-      #       main:
-      #         imageSelector: image
-      #         probes:
-      #           liveness:
-      #             enabled: true
-      #             type: http
-      #             path: /api/version
-      #             port: "{{ .Values.service.api.ports.api.targetPort }}"
-      #           readiness:
-      #             enabled: true
-      #             type: http
-      #             path: /api/version
-      #             port: "{{ .Values.service.api.ports.api.targetPort }}"
-      #           startup:
-      #             enabled: true
-      #             type: tcp
-      #             port: "{{ .Values.service.api.ports.api.targetPort }}"
+      main:
+        podSpec:
+          containers:
+            main:
+              imageSelector: image
+              probes:
+                liveness:
+                  enabled: true
+                  type: http
+                  path: /api/version
+                  port: "{{ .Values.service.api.ports.api.targetPort }}"
+                readiness:
+                  enabled: true
+                  type: http
+                  path: /api/version
+                  port: "{{ .Values.service.api.ports.api.targetPort }}"
+                startup:
+                  enabled: true
+                  type: tcp
+                  port: "{{ .Values.service.api.ports.api.targetPort }}"
       ui:
         enabled: true
         type: Deployment
@@ -103,14 +103,14 @@ spec:
                 # OPENAI_API_BASE_URL
                 # OPENAI_API_KEY
                 # DEFAULT_MODELS
-    # image:
-    #   repository: docker.io/ollama/ollama
-    #   pullPolicy: IfNotPresent
-    #   tag: 0.5.7@sha256:7e672211886f8bd4448a98ed577e26c816b9e8b052112860564afaa2c105800e
-    # rocmImage:
-    #   repository: docker.io/ollama/ollama
-    #   pullPolicy: IfNotPresent
-    #   tag: 0.5.7-rocm@sha256:d05b7eefc8d8309b47377a6ac301a7f2c9e468ba13f3ef1c64dd4f51cd5151e8
+    image:
+      repository: docker.io/ollama/ollama
+      pullPolicy: IfNotPresent
+      tag: 0.5.7@sha256:7e672211886f8bd4448a98ed577e26c816b9e8b052112860564afaa2c105800e
+    rocmImage:
+      repository: docker.io/ollama/ollama
+      pullPolicy: IfNotPresent
+      tag: 0.5.7-rocm@sha256:d05b7eefc8d8309b47377a6ac301a7f2c9e468ba13f3ef1c64dd4f51cd5151e8
     uiImage:
       repository: ghcr.io/open-webui/open-webui
       pullPolicy: IfNotPresent
@@ -143,10 +143,10 @@ spec:
             targetSelector: main
 
     ingress:
-      # api:
-      #   enabled: false
-      #   targetSelector:
-      #     api: api
+      api:
+        enabled: false
+        targetSelector:
+          api: api
       main:
         enabled: true
         hosts:
@@ -160,20 +160,20 @@ spec:
             enabled: false
             certificateIssuer: domain-0-le-prod
 
-    # ollama:
-    #   registration:
-    #     enabled: true
-    #     # admin | user | pending
-    #     def_user_role: "pending"
-    #   stable_diffusion:
-    #     base_url: ""
-    #   whisper:
-    #     model: "base"
-    #   rag:
-    #     # cpu | cuda | mps
-    #     model_device_type: "cpu"
-    #     # embedding model
-    #     model: "all-MiniLM-L6-v2"
+    ollama:
+      registration:
+        enabled: true
+        # admin | user | pending
+        def_user_role: "pending"
+      stable_diffusion:
+        base_url: ""
+      whisper:
+        model: "base"
+      rag:
+        # cpu | cuda | mps
+        model_device_type: "cpu"
+        # embedding model
+        model: "all-MiniLM-L6-v2"
     persistence:
       config:
         enabled: true
