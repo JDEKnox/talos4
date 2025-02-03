@@ -176,17 +176,35 @@ spec:
         model: "all-MiniLM-L6-v2"
     persistence:
       config:
-        enabled: true
-        targetSelector:
-          main:
-            main:
-              mountPath: "/root/.ollama"
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      # config:
+      #   enabled: true
+      #   targetSelector:
+      #     main:
+      #       main:
+      #         mountPath: "/root/.ollama"
       data:
-        enabled: true
-        targetSelector:
-          ui:
-            ui:
-              mountPath: "/app/backend/data"
+        volsync:
+          - name: data
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      # data:
+      #   enabled: true
+      #   targetSelector:
+      #     ui:
+      #       ui:
+      #         mountPath: "/app/backend/data"
 
     portal:
       open:

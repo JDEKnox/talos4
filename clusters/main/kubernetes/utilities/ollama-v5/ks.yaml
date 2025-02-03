@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: ollama-v4
+  name: ollama-v5
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/utilities/ollama-v4/app
+  path: clusters/main/kubernetes/utilities/ollama-v5/app
   prune: true
   sourceRef:
     kind: GitRepository
