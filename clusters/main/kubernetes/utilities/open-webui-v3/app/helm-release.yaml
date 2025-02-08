@@ -52,19 +52,11 @@ spec:
             main:
               probes:
                 liveness:
-                  enabled: true
-                  type: http
-                  path: /
-                  port: "{{ .Values.service.main.ports.main.port }}"
-                readiness:
-                  enabled: true
-                  type: http
-                  path: /
-                  port: "{{ .Values.service.main.ports.main.port }}"
-                startup:
-                  enabled: true
                   type: tcp
-                  port: "{{ .Values.service.main.ports.main.port }}"
+                readiness:
+                  type: tcp
+                startup:
+                  type: tcp
               env:
                 PORT: "{{ .Values.service.main.ports.main.port }}"
                 OLLAMA_BASE_URL: http://192.168.20.127:11434
