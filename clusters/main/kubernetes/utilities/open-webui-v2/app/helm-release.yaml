@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: open-webui
+  name: open-webui-v2
   namespace: utilities
 spec:
   interval: 15m
@@ -79,6 +79,12 @@ spec:
                 RAG_EMBEDDING_MODEL: "{{ .Values.ollama.rag.model }}"
                 RAG_EMBEDDING_MODEL_DEVICE_TYPE: "{{ .Values.ollama.rag.model_device_type }}"
                 WEBUI_AUTH_TRUSTED_EMAIL_HEADER: "{{ .Values.ollama.registration.trusted_email_header }}"
+    securityContext:
+      container:
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false
+        runAsUser: 0
+        runAsGroup: 0
     ingress:
       api:
         enabled: false
@@ -115,12 +121,7 @@ spec:
               enabled: true
             src:
               enabled: true
-    securityContext:
-      container:
-        runAsNonRoot: false
-        readOnlyRootFilesystem: false
-        runAsUser: 0
-        runAsGroup: 0
+
 
 # repository: ghcr.io/open-webui/open-webui
 # pullPolicy: IfNotPresent
