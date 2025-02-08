@@ -109,7 +109,9 @@ spec:
     persistence:
       config:
         enabled: true
+        type: pvc
         mountPath: "/app/backend/data"
+        targetSelectAll: true
         volsync:
           - name: config
             type: restic
