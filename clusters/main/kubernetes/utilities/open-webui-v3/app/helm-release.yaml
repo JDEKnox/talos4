@@ -58,7 +58,7 @@ spec:
                 startup:
                   type: tcp
               env:
-                PORT: "{{ .Values.service.main.ports.main.port }}"
+                PORT: 10686
                 OLLAMA_BASE_URL: http://192.168.20.127:11434
                 # WEBUI_SECRET_KEY:
                 #   secretKeyRef:
