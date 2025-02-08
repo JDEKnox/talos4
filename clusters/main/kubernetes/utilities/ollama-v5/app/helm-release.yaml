@@ -144,7 +144,7 @@ spec:
 
     ingress:
       api:
-        enabled: false
+        enabled: true
         targetSelector:
           api: api
       main:
