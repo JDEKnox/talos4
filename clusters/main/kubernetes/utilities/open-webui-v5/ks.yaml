@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: open-webui-v4
+  name: open-webui-v5
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/utilities/open-webui-v4/app
+  path: clusters/main/kubernetes/utilities/open-webui-v5/app
   prune: true
   sourceRef:
     kind: GitRepository
