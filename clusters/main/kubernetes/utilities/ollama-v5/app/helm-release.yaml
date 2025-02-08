@@ -191,6 +191,9 @@ spec:
       #       main:
       #         mountPath: "/root/.ollama"
       data:
+        enabled: true
+        type: pvc
+        mountPath: "/app/backend/data"
         volsync:
           - name: data
             type: restic
