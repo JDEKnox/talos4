@@ -115,6 +115,12 @@ spec:
               enabled: true
             src:
               enabled: true
+    securityContext:
+      container:
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false
+        runAsUser: 0
+        runAsGroup: 0
 
 # repository: ghcr.io/open-webui/open-webui
 # pullPolicy: IfNotPresent
