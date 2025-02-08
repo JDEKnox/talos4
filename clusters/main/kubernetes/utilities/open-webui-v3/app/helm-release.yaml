@@ -105,6 +105,7 @@ spec:
     persistence:
       config:
         enabled: true
+        mountPath: "/app/backend/data"
         volsync:
           - name: config
             type: restic
@@ -113,16 +114,16 @@ spec:
               enabled: true
             src:
               enabled: true
-      data:
-        enabled: true
-        volsync:
-          - name: data
-            type: restic
-            credentials: s3v2
-            dest:
-              enabled: true
-            src:
-              enabled: true
+      # data:
+      #   enabled: true
+      #   volsync:
+      #     - name: data
+      #       type: restic
+      #       credentials: s3v2
+      #       dest:
+      #         enabled: true
+      #       src:
+      #         enabled: true
 
 
 # repository: ghcr.io/open-webui/open-webui
