@@ -154,7 +154,7 @@ spec:
         tls:
           - hosts:
               - ollama.${DOMAIN_0}
-            secretName: ollama-talos4-tls
+            secretName: ollama-v5-talos4-tls
         integrations:
           certManager:
             enabled: false
