@@ -203,7 +203,7 @@ spec:
         tls:
           - hosts:
               - homepage.${DOMAIN_0}
-            secretName: homepage-v1-talos4-tls
+            secretName: homepage-talos4-tls
         integrations:
           certManager:
             enabled: false
