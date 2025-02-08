@@ -7,4 +7,3 @@ resources:
   - radarr/ks.yaml
   - sonarr/ks.yaml
   - tautulli/ks.yaml
-  - sonarr2/ks.yaml
