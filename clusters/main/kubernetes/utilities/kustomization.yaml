@@ -4,4 +4,3 @@ resources:
   - cyberchef/ks.yaml
   - homepage/ks.yaml
   - ollama-v5/ks.yaml
-  - open-webui-v4/ks.yaml
