@@ -58,7 +58,7 @@ spec:
                 startup:
                   type: tcp
               env:
-                PORT: 10686
+                PORT: "{{ .Values.service.main.ports.main.port }}"
                 OLLAMA_BASE_URL: http://192.168.20.127:11434
                 # WEBUI_SECRET_KEY:
                 #   secretKeyRef:
@@ -76,6 +76,7 @@ spec:
         enabled: true
         # admin | user | pending
         def_user_role: "pending"
+  
     # securityContext:
     #   container:
     #     runAsNonRoot: false
@@ -99,6 +100,12 @@ spec:
           certManager:
             enabled: false
             certificateIssuer: domain-0-le-prod
+    service:
+      main:
+        ports:
+          main:
+            protocol: http
+            port: 10686
     persistence:
       config:
         enabled: true
