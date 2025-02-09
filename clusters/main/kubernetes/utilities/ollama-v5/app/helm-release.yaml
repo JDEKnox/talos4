@@ -184,7 +184,7 @@ spec:
     persistence:
       config:
         volsync:
-          - name: config
+          - name: config1
             type: restic
             credentials: s3v2
             dest:
@@ -202,7 +202,7 @@ spec:
         type: pvc
         mountPath: "/app/backend/data"
         volsync:
-          - name: data
+          - name: data1
             type: restic
             credentials: s3v2
             dest:
