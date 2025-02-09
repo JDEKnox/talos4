@@ -50,13 +50,13 @@ spec:
         podSpec:
           containers:
             main:
-              probes:
-                liveness:
-                  type: tcp
-                readiness:
-                  type: tcp
-                startup:
-                  type: tcp
+              # probes:
+              #   liveness:
+              #     type: tcp
+              #   readiness:
+              #     type: tcp
+              #   startup:
+              #     type: tcp
               env:
                 PORT: "{{ .Values.service.main.ports.main.port }}"
                 OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
@@ -65,37 +65,39 @@ spec:
                   #   name: ollama-secrets
                   #   key: WEBUI_SECRET_KEY
                 # AUTOMATIC1111_BASE_URL: "{{ .Values.ollama.stable_diffusion.base_url }}"
-                ENABLE_SIGNUP: "{{ .Values.ollama.registration.enabled }}"
-                DEFAULT_USER_ROLE: "{{ .Values.ollama.registration.def_user_role }}"
+                ENABLE_SIGNUP: true
+                DEFAULT_USER_ROLE: "user"
+                # ENABLE_SIGNUP: "{{ .Values.ollama.registration.enabled }}"
+                # DEFAULT_USER_ROLE: "{{ .Values.ollama.registration.def_user_role }}"
                 # WHISPER_MODEL: "{{ .Values.ollama.whisper.model }}"
                 # RAG_EMBEDDING_MODEL: "{{ .Values.ollama.rag.model }}"
                 # RAG_EMBEDDING_MODEL_DEVICE_TYPE: "{{ .Values.ollama.rag.model_device_type }}"
                 # WEBUI_AUTH_TRUSTED_EMAIL_HEADER: "{{ .Values.ollama.registration.trusted_email_header }}"
-    ollama:
-      registration:
-        enabled: true
-        # admin | user | pending
-        def_user_role: "pending"
+    # ollama:
+    #   registration:
+    #     enabled: true
+    #     # admin | user | pending
+    #     def_user_role: "pending"
   
-    securityContext:
-      container:
-        runAsNonRoot: false
-        readOnlyRootFilesystem: false
-        runAsUser: 1001
-        runAsGroup: 1001
+    # securityContext:
+    #   container:
+    #     runAsNonRoot: false
+    #     readOnlyRootFilesystem: false
+    #     runAsUser: 1001
+    #     runAsGroup: 1001
     ingress:
-      api:
-        enabled: false
-        targetSelector:
-          api: api
+      # api:
+      #   enabled: false
+      #   targetSelector:
+      #     api: api
       main:
         enabled: true
         hosts:
           - host: ai.${DOMAIN_0}
-        tls:
-          - hosts:
-              - ai.${DOMAIN_0}
-            secretName: ai-talos4-tls
+        # tls:
+        #   - hosts:
+        #       - ai.${DOMAIN_0}
+        #     secretName: ai-talos4-tls
         integrations:
           certManager:
             enabled: true
