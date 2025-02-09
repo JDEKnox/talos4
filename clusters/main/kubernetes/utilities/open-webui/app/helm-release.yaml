@@ -110,7 +110,7 @@ spec:
       config:
         enabled: true
         type: pvc
-        # mountPath: "/app/backend/config"
+        mountPath: "/app/config"
         volsync:
           - name: config1
             type: restic
