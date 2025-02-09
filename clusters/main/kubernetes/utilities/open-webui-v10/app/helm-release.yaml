@@ -30,6 +30,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    pipelines:
+      enabled: true
+      extraEnvVars: []
     credentials:
       s3v2:
         type: s3
@@ -42,10 +45,10 @@ spec:
       repository: ghcr.io/open-webui/open-webui
       pullPolicy: IfNotPresent
       tag: latest@sha256:b2c83b5c7b9b244999307b4b1c0e195d41268f3d3a62b84b470c0cea5c5743fd
-    pipelines:
-      repository: ghcr.io/open-webui/pipelines
-      pullPolicy: IfNotPresent
-      tag: main
+    # pipelines:
+    #   repository: ghcr.io/open-webui/pipelines
+    #   pullPolicy: IfNotPresent
+    #   tag: main
     portal:
       open:
         enabled: true
@@ -61,37 +64,37 @@ spec:
                 WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
                 ENABLE_SIGNUP: true
                 DEFAULT_USER_ROLE: "user"
-                pipelines:
-                  # -- Automatically install Pipelines chart to extend Open WebUI functionality using Pipelines: https://github.com/open-webui/pipelines
-                  enabled: true
-                  # -- This section can be used to pass required environment variables to your pipelines (e.g. Langfuse hostname)
-                  extraEnvVars: []
-      pipelines:
-        enabled: true
-        type: Deployment
-        podSpec:
-          containers:
-            pipelines:
-              primary: true
-              enabled: true
-              imageSelector: pipelines
-              resources:
-                excludeExtra: true
-              probes:
-                liveness:
-                  enabled: true
-                  type: http
-                  path: /
-                  port: "{{ .Values.service.main.ports.main.port }}"
-                readiness:
-                  enabled: true
-                  type: http
-                  path: /
-                  port: "{{ .Values.service.main.ports.main.port }}"
-                startup:
-                  enabled: true
-                  type: tcp
-                  port: "{{ .Values.service.main.ports.main.port }}"
+                # pipelines:
+                #   # -- Automatically install Pipelines chart to extend Open WebUI functionality using Pipelines: https://github.com/open-webui/pipelines
+                #   enabled: true
+                #   # -- This section can be used to pass required environment variables to your pipelines (e.g. Langfuse hostname)
+                #   extraEnvVars: []
+      # pipelines:
+      #   enabled: true
+      #   type: Deployment
+      #   podSpec:
+      #     containers:
+      #       pipelines:
+      #         primary: true
+      #         enabled: true
+      #         imageSelector: pipelines
+      #         resources:
+      #           excludeExtra: true
+      #         probes:
+      #           liveness:
+      #             enabled: true
+      #             type: http
+      #             path: /
+      #             port: "{{ .Values.service.main.ports.main.port }}"
+      #           readiness:
+      #             enabled: true
+      #             type: http
+      #             path: /
+      #             port: "{{ .Values.service.main.ports.main.port }}"
+      #           startup:
+      #             enabled: true
+      #             type: tcp
+      #             port: "{{ .Values.service.main.ports.main.port }}"
     ingress:
       main:
         enabled: true
@@ -108,16 +111,16 @@ spec:
           main:
             protocol: http
             port: 10686
-      pipelines:
-        enabled: true
-        targetSelector: pipelines
-        ports:
-          pipelines:
-            enabled: true
-            protocol: http
-            targetPort: 9099
-            port: 9099
-            targetSelector: pipelines
+      # pipelines:
+      #   enabled: true
+      #   targetSelector: pipelines
+      #   ports:
+      #     pipelines:
+      #       enabled: true
+      #       protocol: http
+      #       targetPort: 9099
+      #       port: 9099
+      #       targetSelector: pipelines
     persistence:
       data:
         enabled: true
