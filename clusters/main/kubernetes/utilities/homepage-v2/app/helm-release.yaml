@@ -100,7 +100,7 @@ spec:
     persistence:
       config:
         volsync:
-          - name: config2
+          - name: config
             type: restic
             credentials: s3v2
             dest:
