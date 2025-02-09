@@ -59,8 +59,8 @@ spec:
                   type: tcp
               env:
                 PORT: "{{ .Values.service.main.ports.main.port }}"
-                OLLAMA_BASE_URL: "${OLLAMA_BASE_URL}"
-                WEBUI_SECRET_KEY: b84b470c0cea5c5743fd
+                OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
+                WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
                   # secretKeyRef:
                   #   name: ollama-secrets
                   #   key: WEBUI_SECRET_KEY
