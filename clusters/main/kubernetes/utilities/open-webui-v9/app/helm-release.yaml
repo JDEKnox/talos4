@@ -93,7 +93,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: ai.${DOMAIN_0}
+          - host: ai.${DOMAIN_1}
         # tls:
         #   - hosts:
         #       - ai.${DOMAIN_0}
@@ -101,7 +101,7 @@ spec:
         integrations:
           certManager:
             enabled: true
-            certificateIssuer: domain-0-le-prod
+            certificateIssuer: domain-1-le-prod
     service:
       main:
         ports:
