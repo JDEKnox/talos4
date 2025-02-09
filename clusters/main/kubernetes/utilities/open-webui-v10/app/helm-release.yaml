@@ -78,6 +78,21 @@ spec:
               imageSelector: pipelines
               resources:
                 excludeExtra: true
+              probes:
+                liveness:
+                  enabled: true
+                  type: http
+                  path: /
+                  port: "{{ .Values.service.main.ports.main.port }}"
+                readiness:
+                  enabled: true
+                  type: http
+                  path: /
+                  port: "{{ .Values.service.main.ports.main.port }}"
+                startup:
+                  enabled: true
+                  type: tcp
+                  port: "{{ .Values.service.main.ports.main.port }}"
     ingress:
       main:
         enabled: true
