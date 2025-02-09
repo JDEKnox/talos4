@@ -35,7 +35,7 @@ spec:
       s3v2:
         type: s3
         url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
-        bucket: "${S3_MINIO_BUCKET_PREFIX}-open-webui-v4"
+        bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
         accessKey: "${S3_MINIO_KEY_ID}"
         secretKey: "${S3_MINIO_SECRET_KEY}"
         encrKey: "${S3_MINIO_SECRET_KEY}"
