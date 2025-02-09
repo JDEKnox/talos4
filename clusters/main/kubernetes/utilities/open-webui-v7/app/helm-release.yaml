@@ -34,7 +34,7 @@ spec:
       s3v2:
         type: s3
         url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
-        bucket: "${S3_MINIO_BUCKET_PREFIX}-open-webui-v4"
+        bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
         accessKey: "${S3_MINIO_KEY_ID}"
         secretKey: "${S3_MINIO_SECRET_KEY}"
         encrKey: "${S3_MINIO_SECRET_KEY}"
@@ -60,10 +60,10 @@ spec:
               env:
                 PORT: "{{ .Values.service.main.ports.main.port }}"
                 OLLAMA_BASE_URL: http://192.168.20.127:11434
-                WEBUI_SECRET_KEY:
-                  secretKeyRef:
-                    name: ollama-secrets
-                    key: WEBUI_SECRET_KEY
+                WEBUI_SECRET_KEY: b84b470c0cea5c5743fd
+                  # secretKeyRef:
+                  #   name: ollama-secrets
+                  #   key: WEBUI_SECRET_KEY
                 # AUTOMATIC1111_BASE_URL: "{{ .Values.ollama.stable_diffusion.base_url }}"
                 ENABLE_SIGNUP: "{{ .Values.ollama.registration.enabled }}"
                 DEFAULT_USER_ROLE: "{{ .Values.ollama.registration.def_user_role }}"
@@ -81,8 +81,8 @@ spec:
       container:
         runAsNonRoot: false
         readOnlyRootFilesystem: false
-        runAsUser: 1000
-        runAsGroup: 1000
+        runAsUser: 1001
+        runAsGroup: 1001
     ingress:
       api:
         enabled: false
