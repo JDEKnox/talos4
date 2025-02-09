@@ -34,11 +34,18 @@ spec:
     credentials:
       s3v2:
         type: s3
-        url: "${S3_URL}" #"https://s3.amazonaws.com"
-        bucket: "${S3_BUCKET_PREFIX}-{{ .Chart.Name }}"
-        accessKey: "${S3_KEY_ID}"
-        secretKey: "${S3_SECRET_KEY}"
-        encrKey: "${S3_SECRET_KEY}"
+        url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
+        bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
+        accessKey: "${S3_MINIO_KEY_ID}"
+        secretKey: "${S3_MINIO_SECRET_KEY}"
+        encrKey: "${S3_MINIO_SECRET_KEY}"
+      # s3v2:
+      #   type: s3
+      #   url: "${S3_URL}" #"https://s3.amazonaws.com"
+      #   bucket: "${S3_BUCKET_PREFIX}-{{ .Chart.Name }}"
+      #   accessKey: "${S3_KEY_ID}"
+      #   secretKey: "${S3_SECRET_KEY}"
+      #   encrKey: "${S3_SECRET_KEY}"
     workload:
       main:
         podSpec:
@@ -111,7 +118,7 @@ spec:
       #         schedule: 10 * * * *
       config:
         volsync:
-          - name: config
+          - name: config1
             type: restic
             credentials: s3v2
             dest:
