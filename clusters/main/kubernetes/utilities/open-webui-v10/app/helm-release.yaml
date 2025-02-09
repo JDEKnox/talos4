@@ -60,12 +60,24 @@ spec:
         podSpec:
           containers:
             main:
+              imageSelector: image
               env:
                 PORT: "{{ .Values.service.main.ports.main.port }}"
                 OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
                 WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
                 ENABLE_SIGNUP: true
                 DEFAULT_USER_ROLE: "user"
+      pipelines:
+        enabled: true
+        type: Deployment
+        podSpec:
+          containers:
+            pipelines:
+              primary: true
+              enabled: true
+              imageSelector: pipelines
+              resources:
+                excludeExtra: true
     ingress:
       main:
         enabled: true
