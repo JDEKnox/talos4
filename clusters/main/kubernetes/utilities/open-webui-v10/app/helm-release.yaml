@@ -104,10 +104,20 @@ spec:
             certificateIssuer: domain-1-le-prod
     service:
       main:
+        targetSelector: main
         ports:
           main:
             protocol: http
             port: 10686
+      pipelines:
+        enabled: true
+        targetSelector: pipelines
+        ports:
+          pipelines:
+            enabled: true
+            protocol: http
+            targetPort: 9099
+            port: 9099
     persistence:
       data:
         enabled: true
