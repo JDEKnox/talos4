@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: open-webui-v7
+  name: open-webui-v8
   namespace: utilities
 spec:
   interval: 15m
@@ -91,11 +91,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: ollama2.${DOMAIN_0}
+          - host: ai.${DOMAIN_0}
         tls:
           - hosts:
-              - ollama2.${DOMAIN_0}
-            secretName: ollama2-talos4-tls
+              - ai.${DOMAIN_0}
+            secretName: ai-talos4-tls
         integrations:
           certManager:
             enabled: false
