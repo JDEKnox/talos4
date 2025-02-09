@@ -60,10 +60,10 @@ spec:
               env:
                 PORT: "{{ .Values.service.main.ports.main.port }}"
                 OLLAMA_BASE_URL: http://192.168.20.127:11434
-                WEBUI_SECRET_KEY:
-                  secretKeyRef:
-                    name: ollama-secrets
-                    key: c38fd6be-5117-4d0f-9d21-c14825c6a364
+                # WEBUI_SECRET_KEY:
+                #   secretKeyRef:
+                #     name: ollama-secrets
+                #     key: c38fd6be-5117-4d0f-9d21-c14825c6a364
                 # AUTOMATIC1111_BASE_URL: "{{ .Values.ollama.stable_diffusion.base_url }}"
                 ENABLE_SIGNUP: "{{ .Values.ollama.registration.enabled }}"
                 DEFAULT_USER_ROLE: "{{ .Values.ollama.registration.def_user_role }}"
