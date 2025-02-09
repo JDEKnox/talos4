@@ -159,5 +159,5 @@ spec:
             secretName: prowlarr-talos4-tls
         integrations:
           certManager:
-            enabled: false
+            enabled: true
             certificateIssuer: domain-0-le-prod
