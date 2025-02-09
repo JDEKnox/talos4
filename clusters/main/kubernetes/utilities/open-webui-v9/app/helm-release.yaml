@@ -86,10 +86,10 @@ spec:
     #     runAsUser: 1001
     #     runAsGroup: 1001
     ingress:
-      # api:
-      #   enabled: false
-      #   targetSelector:
-      #     api: api
+      api:
+        enabled: false
+        targetSelector:
+          api: api
       main:
         enabled: true
         hosts:
