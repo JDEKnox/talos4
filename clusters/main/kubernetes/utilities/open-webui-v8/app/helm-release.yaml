@@ -109,7 +109,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: pvc
+        # type: pvc
         mountPath: "/app/backend/data"
         volsync:
           - name: config1
@@ -121,7 +121,7 @@ spec:
               enabled: true
       data:
         enabled: true
-        type: pvc
+        # type: pvc
         mountPath: "/app/backend/data"
         volsync:
           - name: data1
