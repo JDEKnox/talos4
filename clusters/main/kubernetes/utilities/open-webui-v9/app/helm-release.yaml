@@ -79,12 +79,12 @@ spec:
     #     # admin | user | pending
     #     def_user_role: "pending"
   
-    # securityContext:
-    #   container:
-    #     runAsNonRoot: false
-    #     readOnlyRootFilesystem: false
-    #     runAsUser: 1001
-    #     runAsGroup: 1001
+    securityContext:
+      container:
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false
+        runAsUser: 1001
+        runAsGroup: 1001
     ingress:
       api:
         enabled: false
