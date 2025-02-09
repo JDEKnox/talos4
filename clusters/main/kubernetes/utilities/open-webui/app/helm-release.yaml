@@ -108,6 +108,9 @@ spec:
             port: 10686
     persistence:
       config:
+        enabled: true
+        type: pvc
+        # mountPath: "/app/backend/config"
         volsync:
           - name: config1
             type: restic
