@@ -109,8 +109,8 @@ spec:
     persistence:
       config:
         enabled: true
-        # type: pvc
-        # mountPath: "/app/backend"
+        type: pvc
+        mountPath: "/app/backend/data"
         volsync:
           - name: config1
             type: restic
