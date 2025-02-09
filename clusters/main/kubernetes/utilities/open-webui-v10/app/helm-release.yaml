@@ -33,7 +33,7 @@ spec:
     credentials:
       s3v2:
         type: s3
-        url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
+        url: "${S3_MINIO_URL}" # http://internal.hostname.local:9000
         bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
         accessKey: "${S3_MINIO_KEY_ID}"
         secretKey: "${S3_MINIO_SECRET_KEY}"
@@ -50,54 +50,17 @@ spec:
         podSpec:
           containers:
             main:
-              # probes:
-              #   liveness:
-              #     type: tcp
-              #   readiness:
-              #     type: tcp
-              #   startup:
-              #     type: tcp
               env:
                 PORT: "{{ .Values.service.main.ports.main.port }}"
                 OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
                 WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
-                  # secretKeyRef:
-                  #   name: ollama-secrets
-                  #   key: WEBUI_SECRET_KEY
-                # AUTOMATIC1111_BASE_URL: "{{ .Values.ollama.stable_diffusion.base_url }}"
                 ENABLE_SIGNUP: true
                 DEFAULT_USER_ROLE: "user"
-                # ENABLE_SIGNUP: "{{ .Values.ollama.registration.enabled }}"
-                # DEFAULT_USER_ROLE: "{{ .Values.ollama.registration.def_user_role }}"
-                # WHISPER_MODEL: "{{ .Values.ollama.whisper.model }}"
-                # RAG_EMBEDDING_MODEL: "{{ .Values.ollama.rag.model }}"
-                # RAG_EMBEDDING_MODEL_DEVICE_TYPE: "{{ .Values.ollama.rag.model_device_type }}"
-                # WEBUI_AUTH_TRUSTED_EMAIL_HEADER: "{{ .Values.ollama.registration.trusted_email_header }}"
-    # ollama:
-    #   registration:
-    #     enabled: true
-    #     # admin | user | pending
-    #     def_user_role: "pending"
-  
-    # securityContext:
-    #   container:
-    #     runAsNonRoot: false
-    #     readOnlyRootFilesystem: false
-    #     runAsUser: 1001
-    #     runAsGroup: 1001
     ingress:
-      # api:
-      #   enabled: false
-      #   targetSelector:
-      #     api: api
       main:
         enabled: true
         hosts:
-          - host: ai2.${DOMAIN_1}
-        # tls:
-        #   - hosts:
-        #       - ai.${DOMAIN_0}
-        #     secretName: ai-talos4-tls
+          - host: ai.${DOMAIN_1}
         integrations:
           certManager:
             enabled: true
@@ -109,21 +72,8 @@ spec:
             protocol: http
             port: 10686
     persistence:
-      # config:
-      #   enabled: true
-      #   # type: pvc
-      #   mountPath: "/app/backend/data"
-      #   volsync:
-      #     - name: config1
-      #       type: restic
-      #       credentials: s3v2
-      #       dest:
-      #         enabled: true
-      #       src:
-      #         enabled: true
       data:
         enabled: true
-        # type: pvc
         mountPath: "/app/backend/data"
         volsync:
           - name: data1
@@ -133,32 +83,3 @@ spec:
               enabled: true
             src:
               enabled: true
-    # persistence:
-    #   config:
-    #     enabled: true
-    #     type: pvc
-    #     mountPath: "/app/backend/data"
-    #     targetSelectAll: true
-    #     volsync:
-    #       - name: config
-    #         type: restic
-    #         credentials: s3v2
-    #         dest:
-    #           enabled: true
-    #         src:
-    #           enabled: true
-    #   data:
-    #     enabled: true
-    #     volsync:
-    #       - name: data
-    #         type: restic
-    #         credentials: s3v2
-    #         dest:
-    #           enabled: true
-    #         src:
-    #           enabled: true
-
-
-# repository: ghcr.io/open-webui/open-webui
-# pullPolicy: IfNotPresent
-# tag: latest@sha256:b2c83b5c7b9b244999307b4b1c0e195d41268f3d3a62b84b470c0cea5c5743fd
