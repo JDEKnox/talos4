@@ -150,11 +150,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: ollama.${DOMAIN_0}
+          - host: ai.${DOMAIN_0}
         tls:
           - hosts:
-              - ollama.${DOMAIN_0}
-            secretName: ollama-talos4-tls
+              - ai.${DOMAIN_0}
+            secretName: ai-talos4-tls
         integrations:
           certManager:
             enabled: false
