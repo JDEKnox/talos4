@@ -61,11 +61,11 @@ spec:
                 WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
                 ENABLE_SIGNUP: true
                 DEFAULT_USER_ROLE: "user"
-                pipelines:
-                  # -- Automatically install Pipelines chart to extend Open WebUI functionality using Pipelines: https://github.com/open-webui/pipelines
-                  enabled: true
-                  # -- This section can be used to pass required environment variables to your pipelines (e.g. Langfuse hostname)
-                  extraEnvVars: []
+                # pipelines:
+                #   # -- Automatically install Pipelines chart to extend Open WebUI functionality using Pipelines: https://github.com/open-webui/pipelines
+                #   enabled: true
+                #   # -- This section can be used to pass required environment variables to your pipelines (e.g. Langfuse hostname)
+                #   extraEnvVars: []
       pipelines:
         enabled: true
         type: Deployment
