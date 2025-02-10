@@ -56,9 +56,9 @@ spec:
     #   # If not set and create is true, a name is generated using the fullname template
     #   name: ""
 
-    service:
-      type: ClusterIP
-      port: 80
+    # service:
+    #   type: ClusterIP
+    #   port: 80
 
     ingress:
       main:
