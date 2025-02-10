@@ -92,3 +92,5 @@ spec:
         podSpec:
           containers:
             main:
+              env:
+                INTERFACE: 0.0.0.0
