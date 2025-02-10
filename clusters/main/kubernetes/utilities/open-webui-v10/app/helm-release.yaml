@@ -61,11 +61,6 @@ spec:
                 WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
                 ENABLE_SIGNUP: true
                 DEFAULT_USER_ROLE: "user"
-                # pipelines:
-                #   # -- Automatically install Pipelines chart to extend Open WebUI functionality using Pipelines: https://github.com/open-webui/pipelines
-                #   enabled: true
-                #   # -- This section can be used to pass required environment variables to your pipelines (e.g. Langfuse hostname)
-                #   extraEnvVars: []
       pipelines:
         enabled: true
         type: Deployment
@@ -79,17 +74,17 @@ spec:
                 excludeExtra: true
               probes:
                 liveness:
-                  enabled: true
+                  enabled: false
                   type: http
                   path: /
                   port: "{{ .Values.service.pipelines.ports.pipelines.port }}"
                 readiness:
-                  enabled: true
+                  enabled: false
                   type: http
                   path: /
                   port: "{{ .Values.service.pipelines.ports.pipelines.port }}"
                 startup:
-                  enabled: true
+                  enabled: false
                   type: tcp
                   port: "{{ .Values.service.pipelines.ports.pipelines.port }}"
     ingress:
@@ -121,6 +116,8 @@ spec:
     persistence:
       data:
         enabled: true
+        # targetSelector:
+        #   main:
         mountPath: "/app/backend/data"
         volsync:
           - name: data1
