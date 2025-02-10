@@ -30,9 +30,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    pipelines:
-      enabled: true
-      extraEnvVars: []
     credentials:
       s3v2:
         type: s3
