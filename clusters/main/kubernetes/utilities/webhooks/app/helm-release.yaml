@@ -30,6 +30,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    image:
+      repository: ghcr.io/webhooksite/webhook.site
+      pullPolicy: IfNotPresent
+      tag: latest
+
     credentials:
       s3v2:
         type: s3
@@ -38,13 +43,14 @@ spec:
         accessKey: "${S3_MINIO_KEY_ID}"
         secretKey: "${S3_MINIO_SECRET_KEY}"
         encrKey: "${S3_MINIO_SECRET_KEY}"
-    image:
-      repository: webhooksite/webhook.site
-      pullPolicy: IfNotPresent
-      tag: latest
 
-
-
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              imageSelector: image
+              env:
 
     ingress:
       main:
