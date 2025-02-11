@@ -39,7 +39,7 @@ spec:
         secretKey: "${S3_MINIO_SECRET_KEY}"
         encrKey: "${S3_MINIO_SECRET_KEY}"
     image:
-      repository: ghcr.io/webhooksite/webhook.site
+      repository: webhooksite/webhook.site
       pullPolicy: IfNotPresent
       tag: latest
     # pipelines:
