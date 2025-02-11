@@ -46,7 +46,22 @@ spec:
 
 
 
-
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: webhooks.${DOMAIN_1}
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-1-le-prod
+    service:
+      main:
+        targetSelector: main
+        ports:
+          main:
+            protocol: http
+            port: 8084
 
 # apiVersion: v2
 # name: webhooksite
@@ -56,27 +71,27 @@ spec:
 # appVersion: "latest" # Update this as needed
 
 # Define values that can be overridden
-    service:
-      type: ClusterIP # Or LoadBalancer if you need external access
-      port: 80
-      targetPort: 8080 # This should match the container's port
+    # service:
+    #   type: ClusterIP # Or LoadBalancer if you need external access
+    #   port: 80
+    #   targetPort: 8080 # This should match the container's port
 
-    ingress:
-      enabled: false # Set to true if you want to use an Ingress
-      annotations: {}
-      hosts:
-        - host: webhook.example.com # Replace with your domain
-          paths:
-            - path: /
-              pathType: Prefix
+    # ingress:
+    #   enabled: false # Set to true if you want to use an Ingress
+    #   annotations: {}
+    #   hosts:
+    #     - host: webhook.example.com # Replace with your domain
+    #       paths:
+    #         - path: /
+    #           pathType: Prefix
 
-    resources: # Resource limits and requests
-      requests:
-        cpu: 100m
-        memory: 128Mi
-      limits:
-        cpu: 500m
-        memory: 256Mi
+    # resources: # Resource limits and requests
+    #   requests:
+    #     cpu: 100m
+    #     memory: 128Mi
+    #   limits:
+    #     cpu: 500m
+    #     memory: 256Mi
 
     # Environment variables
     env:
@@ -85,19 +100,33 @@ spec:
       #   value: "some_value"
 
     # Persistent Volume Claim (PVC) - If needed for data persistence
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     # targetSelector:
+    #     #   main:
+    #     mountPath: "/app/backend/data"
+    #     volsync:
+    #       - name: data1
+    #         type: restic
+    #         credentials: s3v2
+    #         dest:
+    #           enabled: true
+    #         src:
+    #           enabled: true
     persistence:
       enabled: false
       storageClass: "" # Provide a storage class name
       size: 1Gi
 
-    # Node selector for scheduling
-    nodeSelector: {}
+    # # Node selector for scheduling
+    # nodeSelector: {}
 
-    # Tolerations for taints
-    tolerations: []
+    # # Tolerations for taints
+    # tolerations: []
 
-    # Affinity for pods
-    affinity: {}
+    # # Affinity for pods
+    # affinity: {}
 
     # Service Account
     serviceAccount:
