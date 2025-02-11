@@ -113,21 +113,25 @@ spec:
       #       targetPort: 9099
       #       port: 9099
       #       targetSelector: pipelines
-    persistence:
-      data:
-        enabled: true
-        # targetSelector:
-        #   main:
-        mountPath: "/app/data"
-        volsync:
-          - name: data1
-            type: restic
-            credentials: s3v2
-            dest:
-              enabled: true
-            src:
-              enabled: true
+    # persistence:
+    #   data:
+    #     enabled: true
+    #     # targetSelector:
+    #     #   main:
+    #     mountPath: "/app/data"
+    #     volsync:
+    #       - name: data1
+    #         type: restic
+    #         credentials: s3v2
+    #         dest:
+    #           enabled: true
+    #         src:
+    #           enabled: true
 
+    persistence:
+      enabled: false
+      storageClass: "" # Provide a storage class name
+      size: 1Gi
 
 
 
