@@ -68,6 +68,7 @@ spec:
           main:
             protocol: http
             port: 8084
+            targetPort: 8084
 
 # apiVersion: v2
 # name: webhooksite
@@ -100,7 +101,7 @@ spec:
     #     memory: 256Mi
 
     # Environment variables
-    env:
+    # env:
       # Example:
       # - name: SOME_ENV_VAR
       #   value: "some_value"
@@ -135,9 +136,9 @@ spec:
     # affinity: {}
 
     # Service Account
-    serviceAccount:
-      create: true
-      name: webhooksite-knox  # Customize the name
+    # serviceAccount:
+    #   create: true
+    #   name: webhooksite-knox  # Customize the name
 
     # Security Context for the pod
     # securityContext:
