@@ -5,4 +5,3 @@ resources:
   - homepage-v2/ks.yaml
   - cyberchef-v2/ks.yaml
   - open-webui-v10/ks.yaml
-  - webhooks-v3/ks.yaml
