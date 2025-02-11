@@ -118,7 +118,7 @@ spec:
         enabled: true
         # targetSelector:
         #   main:
-        mountPath: "/app/config"
+        mountPath: "/app"
         volsync:
           - name: config
             type: restic
