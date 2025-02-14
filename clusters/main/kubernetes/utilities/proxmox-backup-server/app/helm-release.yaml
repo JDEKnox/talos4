@@ -9,7 +9,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: homepage
+      chart: proxmox-backup-server
       version: 5.6.1
       sourceRef:
         kind: HelmRepository
