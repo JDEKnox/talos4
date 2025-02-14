@@ -86,6 +86,8 @@ spec:
             certificateIssuer: domain-0-le-prod
     persistence:
       config:
+        enabled: true
+        mountPath: /etc/proxmox-backup
         volsync:
           - name: config
             type: restic
@@ -95,6 +97,10 @@ spec:
             src:
               enabled: true
       lib:
+        enabled: true
+        type: emptyDir
+        mountPath: /var/lib/proxmox-backup
+        volsync:
           - name: lib
             type: restic
             credentials: s3v2
@@ -103,6 +109,10 @@ spec:
             src:
               enabled: true
       log:
+        enabled: true
+        type: emptyDir
+        mountPath: /var/log/proxmox-backup
+        volsync:
           - name: log
             type: restic
             credentials: s3v2
@@ -111,6 +121,10 @@ spec:
             src:
               enabled: true
       run:
+        enabled: true
+        type: emptyDir
+        mountPath: /run
+        volsync:
           - name: run
             type: restic
             credentials: s3v2
@@ -118,7 +132,21 @@ spec:
               enabled: true
             src:
               enabled: true
-
+  # config:
+  #   enabled: true
+  #   mountPath: /etc/proxmox-backup
+  # lib:
+  #   enabled: true
+  #   type: emptyDir
+  #   mountPath: /var/lib/proxmox-backup
+  # log:
+  #   enabled: true
+  #   type: emptyDir
+  #   mountPath: /var/log/proxmox-backup
+  # run:
+  #   enabled: true
+  #   type: emptyDir
+  #   mountPath: /run
     portal:
       open:
         enabled: true
