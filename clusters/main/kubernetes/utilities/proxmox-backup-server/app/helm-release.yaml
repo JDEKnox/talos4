@@ -89,7 +89,7 @@ spec:
         enabled: true
         mountPath: /etc/proxmox-backup
         volsync:
-          - name: config
+          - name: config1
             type: restic
             credentials: s3v2
             dest:
@@ -101,7 +101,7 @@ spec:
         type: emptyDir
         mountPath: /var/lib/proxmox-backup
         volsync:
-          - name: lib
+          - name: lib1
             type: restic
             credentials: s3v2
             dest:
@@ -113,7 +113,7 @@ spec:
         type: emptyDir
         mountPath: /var/log/proxmox-backup
         volsync:
-          - name: log
+          - name: log1
             type: restic
             credentials: s3v2
             dest:
@@ -125,7 +125,7 @@ spec:
         type: emptyDir
         mountPath: /run
         volsync:
-          - name: run
+          - name: run1
             type: restic
             credentials: s3v2
             dest:
