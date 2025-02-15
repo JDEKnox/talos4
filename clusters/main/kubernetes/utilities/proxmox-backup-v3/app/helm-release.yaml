@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: proxmox-backup-v2
+  name: proxmox-backup-v3
   namespace: utilities
 spec:
   interval: 15m
@@ -91,7 +91,7 @@ spec:
         enabled: true
         mountPath: /etc/proxmox-backup
         volsync:
-          - name: config2
+          - name: config3
             type: restic
             credentials: s3v2
             dest:
