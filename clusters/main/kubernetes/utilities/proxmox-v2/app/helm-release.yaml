@@ -66,6 +66,8 @@ spec:
                   type: https
                 startup:
                   type: tcp
+              env:
+                RUST_BACKTRACE: 1
 
     persistence:
       config:
