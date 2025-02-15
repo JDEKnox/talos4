@@ -87,17 +87,17 @@ spec:
             enabled: true
             certificateIssuer: domain-0-le-prod
     persistence:
-      config:
-        enabled: true
-        mountPath: /etc/proxmox-backup
-        volsync:
-          - name: config3
-            type: restic
-            credentials: s3v2
-            dest:
-              enabled: true
-            src:
-              enabled: true
+      # config:
+      #   enabled: true
+      #   mountPath: /etc/proxmox-backup
+      #   volsync:
+      #     - name: config3
+      #       type: restic
+      #       credentials: s3v2
+      #       dest:
+      #         enabled: true
+      #       src:
+      #         enabled: true
       # lib:
       #   enabled: true
       #   type: emptyDir
@@ -138,9 +138,9 @@ spec:
         enabled: true
         existingClaim: plex-utils-pvc
         mountPath: /mnt
-      # config:
-      #   enabled: true
-      #   mountPath: /etc/proxmox-backup
+      config:
+        enabled: true
+        mountPath: /etc/proxmox-backup
       lib:
         enabled: true
         type: emptyDir
