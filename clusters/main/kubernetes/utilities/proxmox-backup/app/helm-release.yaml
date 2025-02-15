@@ -75,6 +75,8 @@ spec:
                   type: https
                 startup:
                   type: tcp
+              env:
+                RUST_BACKTRACE: 1
     ingress:
       main:
         enabled: true
@@ -132,10 +134,10 @@ spec:
       #         enabled: true
       #       src:
       #         enabled: true
-      plex-utils:
-        enabled: true
-        existingClaim: plex-utils-pvc
-        mountPath: /mnt
+      # plex-utils:
+      #   enabled: true
+      #   existingClaim: plex-utils-pvc
+      #   mountPath: /mnt
       config:
         enabled: true
         mountPath: /etc/proxmox-backup
