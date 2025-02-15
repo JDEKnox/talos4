@@ -135,7 +135,7 @@ spec:
       plex-utils:
         enabled: true
         existingClaim: plex-utils-pvc
-        mountPath: /mnt/StruNAS4_54TB
+        mountPath: /mnt/StruNAS4_54TB_Slow
   # config:
   #   enabled: true
   #   mountPath: /etc/proxmox-backup
