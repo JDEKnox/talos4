@@ -91,7 +91,7 @@ spec:
         enabled: true
         mountPath: /etc/proxmox-backup
         volsync:
-          - name: config
+          - name: config2
             type: restic
             credentials: s3v2
             dest:
