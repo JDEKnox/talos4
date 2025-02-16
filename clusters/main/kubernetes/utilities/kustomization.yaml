@@ -7,3 +7,4 @@ resources:
   - open-webui-v10/ks.yaml
   - pvc-util.yaml
   - proxmox-v2/ks.yaml
+  - cloudflareddns/ks.yaml
