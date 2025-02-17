@@ -98,6 +98,10 @@ spec:
             protocol: http
             targetPort: 3000
     persistence:
+      plex-utils:
+        enabled: true
+        existingClaim: plex-utils-pvc
+        mountPath: /mnt
       config:
         volsync:
           - name: config

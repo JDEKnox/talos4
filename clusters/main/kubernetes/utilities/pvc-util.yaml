@@ -10,8 +10,8 @@ spec:
     - ReadWriteMany # Or ReadWriteOnce if only one pod needs to write
   persistentVolumeReclaimPolicy: Retain # Important: Prevents data loss on PV deletion
   nfs:
-    server: ${CONFIG_TRUENAS_IP} #192.168.20.237 # Your NFS server IP
-    path: ${MEDIA_NFS_PATH} #/mnt/StruNAS4_54TB_Slow/54TB_Slow
+    server: ${CONFIG_TRUENAS_IP}
+    path: ${MEDIA_NFS_PATH}
   storageClassName: longhorn
 ---
 apiVersion: v1
