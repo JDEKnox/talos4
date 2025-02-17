@@ -10,3 +10,4 @@ resources:
   - proxmox-v2/ks.yaml
   - it-tools/ks.yaml
   - uptime-kuma/ks.yaml
+  - pihole/ks.yaml
