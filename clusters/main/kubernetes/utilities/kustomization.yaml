@@ -9,4 +9,4 @@ resources:
   - cloudflareddns/ks.yaml
   - it-tools/ks.yaml
   - uptime-kuma/ks.yaml
-  - pihole/ks.yaml
+  - pihole-v2/ks.yaml
