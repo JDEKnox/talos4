@@ -32,7 +32,9 @@ spec:
       stopAll: false
     pihole:
       webPassword: "${PIHOLE_PASSWORD}"
-      dnsServers: []
+      dnsServers:
+        - "9.9.9.9"
+        - "1.1.1.1"
     credentials:
       s3v2:
         type: s3
@@ -73,25 +75,29 @@ spec:
         volsync:
         - name: config
           type: restic
-          cleanupTempPVC: true
-          cleanupCachePVC: true
           credentials: s3v2
           dest:
             enabled: true
           src:
             enabled: true
-            trigger:
-              schedule: 20 1 * * *
       dnsmasq:
         volsync:
         - name: dnsmasq
           type: restic
-          cleanupTempPVC: true
-          cleanupCachePVC: true
           credentials: s3v2
           dest:
             enabled: true
           src:
             enabled: true
             trigger:
-              schedule: 20 1 * * *
+
+
+      # config:
+      #   volsync:
+      #     - name: config
+      #       type: restic
+      #       credentials: s3v2
+      #       dest:
+      #         enabled: true
+      #       src:
+      #         enabled: true

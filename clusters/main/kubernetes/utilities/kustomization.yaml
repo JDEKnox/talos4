@@ -7,7 +7,6 @@ resources:
   - open-webui-v10/ks.yaml
   - pvc-util.yaml
   - cloudflareddns/ks.yaml
-  - proxmox-v2/ks.yaml
   - it-tools/ks.yaml
   - uptime-kuma/ks.yaml
   - pihole/ks.yaml
