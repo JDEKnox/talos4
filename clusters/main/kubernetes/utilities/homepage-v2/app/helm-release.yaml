@@ -101,7 +101,7 @@ spec:
       plex-utils:
         enabled: true
         existingClaim: plex-utils-pvc
-        mountPath: /mnt
+        mountPath: /app/public/images
       config:
         volsync:
           - name: config
