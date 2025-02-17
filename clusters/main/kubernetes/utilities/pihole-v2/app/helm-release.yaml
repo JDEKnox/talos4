@@ -35,6 +35,19 @@ spec:
       dnsServers:
         - "9.9.9.9"
         - "1.1.1.1"
+    securityContext:
+      container:
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        allowPrivilegeEscalation: true
+        runAsUser: 0
+        runAsGroup: 0
+        capabilities:
+          add:
+            - NET_ADMIN
+            - SETFCAP
+            - SETPCAP
+            - KILL
     credentials:
       s3v2:
         type: s3
