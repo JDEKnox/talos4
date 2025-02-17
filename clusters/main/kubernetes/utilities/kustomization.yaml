@@ -6,5 +6,6 @@ resources:
   - cyberchef-v2/ks.yaml
   - open-webui-v10/ks.yaml
   - pvc-util.yaml
-  - proxmox-v2/ks.yaml
   - cloudflareddns/ks.yaml
+  - proxmox-v2/ks.yaml
+  - it-tools/ks.yaml
