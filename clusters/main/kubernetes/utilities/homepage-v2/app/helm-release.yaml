@@ -100,8 +100,8 @@ spec:
     persistence:
       plex-utils:
         enabled: true
-        existingClaim: plex-backgrounds-pvc
-        mountPath: /app/public/images
+        existingClaim: plex-utils-pvc
+        mountPath: /mnt
       config:
         volsync:
           - name: config
