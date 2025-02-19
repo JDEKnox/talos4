@@ -7,5 +7,5 @@ resources:
   - cloudflareddns/ks.yaml
   - it-tools/ks.yaml
   - uptime-kuma/ks.yaml
-  - pvc-backgrounds.yaml
   - homepage-v2/ks.yaml
+  - pvc-backgrounds-v2.yaml
