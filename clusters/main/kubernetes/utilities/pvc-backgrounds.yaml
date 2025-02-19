@@ -25,4 +25,4 @@ spec:
   resources:
     requests:
       storage: 100Gi # This should match the PV's storage value
-  volumeName: plex-utils-pv
+  volumeName: plex-backgrounds-pv
