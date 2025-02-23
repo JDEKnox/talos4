@@ -66,7 +66,7 @@ spec:
               enabled: true
               certificateIssuer: domain-0-le-prod
           hosts:
-            - host: qbit.${DOMAIN_0}
+            - host: qbit3.${DOMAIN_0}
               paths:
                 - path: /
                   pathType: Prefix
