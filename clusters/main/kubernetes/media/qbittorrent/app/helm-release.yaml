@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: qbittorrent-v5
-    namespace: qbittorrent-v5
+    name: qbittorrent
+    namespace: media
 spec:
     postRenderers:
     - kustomize:
