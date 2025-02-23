@@ -7,4 +7,4 @@ resources:
   - radarr/ks.yaml
   - sonarr/ks.yaml
   - tautulli/ks.yaml
-  - qbittorrent/ks.yaml
+  - namespace.yaml
