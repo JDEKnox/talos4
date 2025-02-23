@@ -9,4 +9,4 @@ resources:
   - uptime-kuma/ks.yaml
   - homepage-v2/ks.yaml
   - namespace.yaml
-  - qbittorrent2/ks.yaml
+  - qbittorrent-v3/ks.yaml
