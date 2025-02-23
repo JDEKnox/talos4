@@ -89,6 +89,17 @@ spec:
       workload:
         qbitportforward:
           enabled: false
+        main:
+          podSpec:
+            containers:
+              main:
+                securityContext:
+                  allowPrivilegeEscalation: true
+                  privileged: false
+                  capabilities:
+                    add:
+                      - NET_RAW
+                      - NET_ADMIN
       service:
         proxy:
           enabled: true
