@@ -52,24 +52,32 @@ spec:
       ingress:
         main:
           enabled: true
+          hosts:
+            - host: qbit3.${DOMAIN_0}
           integrations:
-            traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-              middlewares:
-              - name: auth
-                namespace: 'traefik'
-              - name: torrent
-                namespace: 'traefik'
             certManager:
               enabled: true
               certificateIssuer: domain-0-le-prod
-          hosts:
-            - host: qbit3.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
+        # main:
+        #   enabled: true
+        #   integrations:
+        #     traefik:
+        #       enabled: true
+        #       entrypoints:
+        #       - websecure
+        #       middlewares:
+        #       - name: auth
+        #         namespace: 'traefik'
+        #       - name: torrent
+        #         namespace: 'traefik'
+        #     certManager:
+        #       enabled: true
+        #       certificateIssuer: domain-0-le-prod
+        #   hosts:
+        #     - host: qbit3.${DOMAIN_0}
+        #       paths:
+        #         - path: /
+        #           pathType: Prefix
       persistence:
         config:
           volsync:
