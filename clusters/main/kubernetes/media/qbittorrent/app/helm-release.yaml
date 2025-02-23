@@ -71,15 +71,15 @@ spec:
                 - path: /
                   pathType: Prefix
       persistence:
-      config:
-        volsync:
-          - name: config
-            type: restic
-            credentials: s3v2
-            dest:
-              enabled: true
-            src:
-              enabled: true
+        config:
+          volsync:
+            - name: config
+              type: restic
+              credentials: s3v2
+              dest:
+                enabled: true
+              src:
+                enabled: true
         plex-media:
           enabled: true
           existingClaim: plex-media-pvc
