@@ -8,6 +8,5 @@ resources:
   - it-tools/ks.yaml
   - uptime-kuma/ks.yaml
   - homepage-v2/ks.yaml
-  - pvc-backgrounds-v2.yaml
   - namespace.yaml
   - qbittorrent2/ks.yaml
