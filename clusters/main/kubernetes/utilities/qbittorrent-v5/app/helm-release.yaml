@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: qbittorrent-v4
+    name: qbittorrent-v5
     namespace: utilities
 spec:
     postRenderers:
@@ -89,17 +89,14 @@ spec:
       workload:
         qbitportforward:
           enabled: false
-        main:
-          podSpec:
-            containers:
-              main:
-                securityContext:
-                  allowPrivilegeEscalation: true
-                  privileged: false
-                  capabilities:
-                    add:
-                      - NET_RAW
-                      - NET_ADMIN
+      securityContext:
+        container:
+          allowPrivilegeEscalation: true
+          privileged: false
+          capabilities:
+            add:
+              - NET_RAW
+              - NET_ADMIN
       service:
         proxy:
           enabled: true
