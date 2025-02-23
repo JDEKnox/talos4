@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-    name: qbittorrent-v2
+    name: qbittorrent-v3
     namespace: media
 spec:
     postRenderers:
@@ -71,12 +71,10 @@ spec:
                 - path: /
                   pathType: Prefix
       persistence:
-        config:
-          volsync:
+      config:
+        volsync:
           - name: config
             type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true
             credentials: s3v2
             dest:
               enabled: true
