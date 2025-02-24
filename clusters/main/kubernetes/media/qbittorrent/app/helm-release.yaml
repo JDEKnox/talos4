@@ -96,7 +96,7 @@ spec:
           enabled: true
           existingClaim: plex-media-pvc
           mountPath: /mnt
-      workload:
+      # workload:
         # qbitportforward:
         #   enabled: true
         #   QBT_USERNAME: "${QB_ADMIN}"
