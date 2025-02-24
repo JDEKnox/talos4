@@ -79,21 +79,12 @@ spec:
     ingress:
       main:
         enabled: true
-        integrations:
-          traefik:
-            enabled: true
-            middlewares:
-              - name: internal-only
-              - name: auth
-        tls:
-          - hosts:
-              - qbittorrent.${DOMAIN_0}
-            clusterIssuer: domain-0-wildcard
         hosts:
-          - host: qbittorrent.${DOMAIN_0}
-            paths:
-              - path: /
-                pathType: Prefix
+          - host: qbit3.${DOMAIN_0}
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
     persistence:
       config:
         volsync:
