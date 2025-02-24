@@ -36,10 +36,10 @@ spec:
         remediation:
             retries: 3
     values:
-      # qbitportforward:
-      #   enabled: true
-      #   QBT_USERNAME: "${QB_ADMIN}"
-      #   QBT_PASSWORD: "${QB_ADMIN_PASSWORD}"
+      qbitportforward:
+        enabled: true
+        QBT_USERNAME: "${QB_ADMIN}"
+        QBT_PASSWORD: "${QB_ADMIN_PASSWORD}"
       portal:
         open:
           enabled: false
@@ -97,10 +97,10 @@ spec:
           existingClaim: plex-media-pvc
           mountPath: /mnt
       workload:
-        qbitportforward:
-          enabled: true
-          QBT_USERNAME: "${QB_ADMIN}"
-          QBT_PASSWORD: "${QB_ADMIN_PASSWORD}"
+        # qbitportforward:
+        #   enabled: true
+        #   QBT_USERNAME: "${QB_ADMIN}"
+        #   QBT_PASSWORD: "${QB_ADMIN_PASSWORD}"
       service:
         proxy:
           enabled: true
