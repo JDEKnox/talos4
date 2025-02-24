@@ -114,7 +114,7 @@ spec:
           - 192.168.0.0/16
           env:
             VPN_TYPE: wireguard
-            VPN_SERVICE_PROVIDER: nordvpn
+            VPN_SERVICE_PROVIDER: protonvpn
             #WIREGUARD_ENDPOINT_IP: ${WG_ENDPOINT_IP}
             #WIREGUARD_ENDPOINT_PORT: ${WG_ENDPOINT_PORT}
             #WIREGUARD_PUBLIC_KEY: ${WG_PUBLIC_KEY}
@@ -123,10 +123,11 @@ spec:
             #WIREGUARD_ADDRESSES: ${WG_ADDRESSES}
             HTTPPROXY: "on"
             FIREWALL_INPUT_PORTS: 10095,8888
-            #SERVER_COUNTRIES: ${COUNTRY}
-            SERVER_HOSTNAMES: ${SERVER_HOSTNAMES}
+            SERVER_COUNTRIES: ${SERVER_COUNTRIES}
+            SERVER_CITIES: ${SERVER_CITIES}
+            #SERVER_HOSTNAMES: ${SERVER_HOSTNAMES}
             HTTPPROXY_LOG: "on"
             HTTPPROXY_LISTENING_ADDRESS: :8888
             #VPN_PORT_FORWARDING_UP_COMMAND: /bin/sh -c 'wget -O- --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:10095/api/v2/app/setPreferences 2>&1'
-            VPN_PORT_FORWARDING: true
-            # PORT_FORWARD_ONLY: true
+            VPN_PORT_FORWARDING: "on"
+            PORT_FORWARD_ONLY: "on"
