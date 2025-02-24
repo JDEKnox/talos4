@@ -51,6 +51,15 @@ spec:
       enabled: true
       QBT_USERNAME: "${ADMIN}"
       QBT_PASSWORD: "${ADMIN_PASSWORD}"
+    service:
+      proxy:
+        enabled: true
+        ports:
+          gluetun:
+            enabled: true
+            port: 8888
+            protocol: "http"
+            targetPort: 8888
     addons:
       vpn:
         type: gluetun
