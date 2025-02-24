@@ -49,8 +49,8 @@ spec:
         encrKey: "${S3_MINIO_SECRET_KEY}"
     qbitportforward:
       enabled: true
-      QBT_USERNAME: "${ADMIN}"
-      QBT_PASSWORD: "${ADMIN_PASSWORD}"
+      # QBT_USERNAME: "${ADMIN}"
+      # QBT_PASSWORD: "${ADMIN_PASSWORD}"
     addons:
       vpn:
         type: gluetun
