@@ -95,7 +95,7 @@ spec:
           #SERVER_HOSTNAMES: ${SERVER_HOSTNAMES}
           HTTPPROXY_LOG: "on"
           HTTPPROXY_LISTENING_ADDRESS: :8888
-          VPN_PORT_FORWARDING_UP_COMMAND: /bin/sh -c 'wget -O- --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:10095/api/v2/app/setPreferences 2>&1'
+          VPN_PORT_FORWARDING_UP_COMMAND: "/bin/sh -c 'wget -O- --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:10095/api/v2/app/setPreferences 2>&1'"
           VPN_PORT_FORWARDING: "on"
           PORT_FORWARD_ONLY: "on"
           #VPN_PORT_FORWARDING_STATUS_FILE: /tmp/gluetun/forwarded_port
