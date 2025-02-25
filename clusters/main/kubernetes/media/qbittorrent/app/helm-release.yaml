@@ -56,10 +56,11 @@ spec:
             port: 8888
             protocol: "http"
             targetPort: 8888
-    qbitportforward:
-      enabled: true
-      QBT_USERNAME: "${ADMIN}"
-      QBT_PASSWORD: "${ADMIN_PASSWORD}"
+    workload:
+      qbitportforward:
+        enabled: true
+        QBT_USERNAME: "${ADMIN}"
+        QBT_PASSWORD: "${ADMIN_PASSWORD}"
     addons:
       vpn:
         type: gluetun
