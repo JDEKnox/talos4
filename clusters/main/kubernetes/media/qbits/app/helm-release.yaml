@@ -47,10 +47,11 @@ spec:
         accessKey: "${S3_MINIO_KEY_ID}"
         secretKey: "${S3_MINIO_SECRET_KEY}"
         encrKey: "${S3_MINIO_SECRET_KEY}"
-    qbitportforward:
-      enabled: true
-      QBT_USERNAME: "${ADMIN}"
-      QBT_PASSWORD: "${ADMIN_PASSWORD}"
+    workload:
+      qbitportforward:
+        enabled: false
+        QBT_USERNAME: "${ADMIN}"
+        QBT_PASSWORD: "${ADMIN_PASSWORD}"
     service:
       proxy:
         enabled: true
