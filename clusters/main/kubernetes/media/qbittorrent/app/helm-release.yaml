@@ -68,11 +68,15 @@ spec:
       proxy:
         enabled: true
         ports:
-          gluetun:
-            enabled: true
-            port: 8888
-            protocol: "http"
-            targetPort: 8888
+          enabled: true
+          port: 8888
+          protocol: "http"
+          targetPort: 8888
+          # gluetun:
+          #   enabled: true
+          #   port: 8888
+          #   protocol: "http"
+          #   targetPort: 8888
     addons:
       vpn:
         type: gluetun
