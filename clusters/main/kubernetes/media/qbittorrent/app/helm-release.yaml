@@ -99,7 +99,7 @@ spec:
           VPN_PORT_FORWARDING: "on"
           PORT_FORWARD_ONLY: "on"
           VPN_PORT_FORWARDING_STATUS_FILE: /tmp/gluetun/forwarded_port
-          VPN_PORT_FORWARDING_LISTENING_PORT: 6881
+          # VPN_PORT_FORWARDING_LISTENING_PORT: 6881
     ingress:
       main:
         enabled: true
