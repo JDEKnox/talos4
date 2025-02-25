@@ -68,15 +68,11 @@ spec:
       proxy:
         enabled: true
         ports:
-          enabled: true
-          port: 8888
-          protocol: "http"
-          targetPort: 8888
-          # gluetun:
-          #   enabled: true
-          #   port: 8888
-          #   protocol: "http"
-          #   targetPort: 8888
+          gluetun:
+            enabled: true
+            port: 8888
+            protocol: "http"
+            targetPort: 8888
     addons:
       vpn:
         type: gluetun
@@ -100,7 +96,7 @@ spec:
           HTTPPROXY_LOG: "on"
           HTTPPROXY_LISTENING_ADDRESS: :8888
           #VPN_PORT_FORWARDING_UP_COMMAND: ${VPN_UP_COMMAND}
-          VPN_PORT_FORWARDING: "on"
+          #VPN_PORT_FORWARDING: "on"
           PORT_FORWARD_ONLY: "on"
           #VPN_PORT_FORWARDING_STATUS_FILE: /tmp/gluetun/forwarded_port
           # VPN_PORT_FORWARDING_LISTENING_PORT: 6881
