@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: qbits
+  name: qbittorrent
   namespace: media
 spec:
   interval: 15m
@@ -21,7 +21,7 @@ spec:
         - target:
             version: v1
             kind: Deployment
-            name: qbits
+            name: qbittorrent
           patch: |
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
@@ -90,7 +90,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: qbits.${DOMAIN_0}
+          - host: qbittorrent.${DOMAIN_0}
         integrations:
           certManager:
             enabled: true

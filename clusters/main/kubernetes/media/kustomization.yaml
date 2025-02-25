@@ -8,4 +8,4 @@ resources:
   - sonarr/ks.yaml
   - tautulli/ks.yaml
   - namespace.yaml
-  - qbits/ks.yaml
+  - qbittorrent/ks.yaml
