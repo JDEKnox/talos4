@@ -49,7 +49,7 @@ spec:
         encrKey: "${S3_MINIO_SECRET_KEY}"
     workload:
       qbitportforward:
-        enabled: false
+        enabled: true
         QBT_USERNAME: "${ADMIN}"
         QBT_PASSWORD: "${ADMIN_PASSWORD}"
     service:
