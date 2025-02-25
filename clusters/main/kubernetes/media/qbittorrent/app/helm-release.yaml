@@ -65,8 +65,8 @@ spec:
     qbitportforward:
       enabled: true
       QBT_ADDR: ${QBT_ADDR}
-      QBT_USERNAME: "${QB_ADMIN}"
-      QBT_PASSWORD: "${QB_ADMIN_PASSWORD}"
+      QBT_USERNAME: ${QB_ADMIN}
+      QBT_PASSWORD: ${QB_ADMIN_PASSWORD}
     service:
       proxy:
         enabled: true
