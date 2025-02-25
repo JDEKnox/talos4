@@ -68,7 +68,7 @@ spec:
       proxy:
         enabled: true
         ports:
-          gluetun:
+          proxy:
             enabled: true
             port: 8888
             protocol: "http"
@@ -88,7 +88,7 @@ spec:
           WIREGUARD_PRIVATE_KEY: ${WG_PRIVATE_KEY}
           #FIREWALL_VPN_INPUT_PORTS: ${WG_FIREWALL_INPUT_PORT}
           #WIREGUARD_ADDRESSES: ${WG_ADDRESSES}
-          HTTPPROXY: "on"
+          #HTTPPROXY: "on"
           FIREWALL_INPUT_PORTS: 10095,8888
           SERVER_COUNTRIES: ${SERVER_COUNTRIES}
           SERVER_CITIES: ${SERVER_CITIES}
