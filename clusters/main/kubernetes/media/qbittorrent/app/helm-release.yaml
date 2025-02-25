@@ -61,9 +61,9 @@ spec:
     #     enabled: true
     #     # QBT_USERNAME: "${ADMIN}"
     #     # QBT_PASSWORD: "${ADMIN_PASSWORD}"
-    workload:
-      qbitportforward:
-        enabled: true
+
+    qbitportforward:
+      enabled: true
     service:
       proxy:
         enabled: true
