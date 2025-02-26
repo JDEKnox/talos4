@@ -93,3 +93,8 @@ spec:
             main:
               env:
                 FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
+                FTLCONF_dns_upstreams: ${BLOCKY_IP}
+    service:
+      dns:
+        loadBalancerIP: ${PIHOLE_IP}
+        type: LoadBalancer
