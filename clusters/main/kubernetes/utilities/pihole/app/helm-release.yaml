@@ -86,3 +86,10 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: domain-0-le-prod
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
