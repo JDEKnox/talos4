@@ -73,3 +73,16 @@ spec:
             enabled: true
             trigger:
               schedule: 40 1 * * *
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: cyberchef.${DOMAIN_0}
+        tls:
+          - hosts:
+              - cyberchef.${DOMAIN_0}
+            secretName: cyberchef-talos4-tls
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
