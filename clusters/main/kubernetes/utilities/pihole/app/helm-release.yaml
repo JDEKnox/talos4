@@ -77,11 +77,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: cyberchef.${DOMAIN_0}
+          - host: pihole.${DOMAIN_0}
         tls:
           - hosts:
-              - cyberchef.${DOMAIN_0}
-            secretName: cyberchef-talos4-tls
+              - pihole.${DOMAIN_0}
+            secretName: pihole-talos4-tls
         integrations:
           certManager:
             enabled: true
