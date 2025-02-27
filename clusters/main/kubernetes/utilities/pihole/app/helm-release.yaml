@@ -49,7 +49,7 @@ spec:
     persistence:
       config:
         volsync:
-        - name: config
+        - name: config3
           type: restic
           cleanupTempPVC: true
           cleanupCachePVC: true
@@ -62,7 +62,7 @@ spec:
               schedule: 40 1 * * *
       dnsmasq:
         volsync:
-        - name: dnsmasq
+        - name: dnsmasq3
           type: restic
           cleanupTempPVC: true
           cleanupCachePVC: true
