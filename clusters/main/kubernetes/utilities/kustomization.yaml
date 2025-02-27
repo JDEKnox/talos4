@@ -9,4 +9,3 @@ resources:
   - uptime-kuma/ks.yaml
   - homepage-v2/ks.yaml
   - namespace.yaml
-  - pihole/ks.yaml
