@@ -58,8 +58,6 @@ spec:
             enabled: true
           src:
             enabled: true
-            trigger:
-              schedule: 40 1 * * *
       dnsmasq:
         volsync:
         - name: dnsmasq1
@@ -71,8 +69,6 @@ spec:
             enabled: true
           src:
             enabled: true
-            trigger:
-              schedule: 40 1 * * *
     ingress:
       main:
         enabled: true
