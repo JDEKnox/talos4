@@ -55,14 +55,7 @@ spec:
         dnsChallenge:
           enabled: false
           domain: dns01.clouddns.com
-#dumb guy
-      defaultUpstreams:
-        # Cloudflare
-        - tcp-tls:1.1.1.1:853
-        - tcp-tls:1.0.0.1:853
-        # Quad 9
-        - tcp-tls:9.9.9.9:853
-#dumb guy
+
       forward:
         enabled: false
         primary: tls://1.1.1.1
