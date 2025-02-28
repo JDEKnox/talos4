@@ -38,14 +38,14 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: ${BLOCKY_IP}
         type: LoadBalancer
-      dot:
-        externalTrafficPolicy: Local
-        loadBalancerIP: ${BLOCKY_IP}
-        type: LoadBalancer
-      https:
-        externalTrafficPolicy: Local
-        loadBalancerIP: ${BLOCKY_IP}
-        type: LoadBalancer
+      # dot:
+      #   externalTrafficPolicy: Local
+      #   loadBalancerIP: ${BLOCKY_IP}
+      #   type: LoadBalancer
+      # https:
+      #   externalTrafficPolicy: Local
+      #   loadBalancerIP: ${BLOCKY_IP}
+      #   type: LoadBalancer
     k8sgateway:
       # -- list of processed domains
       domains:
