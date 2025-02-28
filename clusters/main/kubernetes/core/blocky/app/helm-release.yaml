@@ -38,10 +38,10 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: ${BLOCKY_IP}
         type: LoadBalancer
-      # dot:
-      #   externalTrafficPolicy: Local
-      #   loadBalancerIP: ${BLOCKY_IP}
-      #   type: LoadBalancer
+      dot:
+        externalTrafficPolicy: Local
+        loadBalancerIP: ${BLOCKY_IP2}
+        type: LoadBalancer
       # https:
       #   externalTrafficPolicy: Local
       #   loadBalancerIP: ${BLOCKY_IP}
