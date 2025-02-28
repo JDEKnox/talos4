@@ -34,7 +34,7 @@ spec:
     global:
       stopAll: false
     service:
-      dns:
+      dot:
         externalTrafficPolicy: Local
         loadBalancerIP: ${BLOCKY_IP}
         type: LoadBalancer
