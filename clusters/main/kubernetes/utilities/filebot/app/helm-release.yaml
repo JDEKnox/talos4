@@ -80,3 +80,16 @@ spec:
         enabled: true
         existingClaim: plex-utils-pvc
         mountPath: /mnt
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: filebot.${DOMAIN_0}
+        tls:
+          - hosts:
+              - filebot.${DOMAIN_0}
+            secretName: filebot-talos4-tls
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
