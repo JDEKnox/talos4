@@ -10,3 +10,4 @@ resources:
   - homepage-v2/ks.yaml
   - namespace.yaml
   - pihole/ks.yaml
+  - filebot/ks.yaml

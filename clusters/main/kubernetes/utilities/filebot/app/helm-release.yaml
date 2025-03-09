@@ -1,0 +1,82 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: filebot
+  namespace: utilities
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: filebot
+      version: 12.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    credentials:
+      s3v2:
+        type: s3
+        url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
+        bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
+        accessKey: "${S3_MINIO_KEY_ID}"
+        secretKey: "${S3_MINIO_SECRET_KEY}"
+        encrKey: "${S3_MINIO_SECRET_KEY}"
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      storage:
+        volsync:
+          - name: storage
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      watch:
+        volsync:
+          - name: watch
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      output:
+        volsync:
+          - name: output
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      plex-utils:
+        enabled: true
+        existingClaim: plex-utils-pvc
+        mountPath: /mnt
