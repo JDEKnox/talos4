@@ -25,9 +25,6 @@ spec:
         remediation:
             retries: 3
     values:
-      portal:
-        open:
-          enabled: false
       global:
         stopAll: false
       credentials:
@@ -76,7 +73,22 @@ spec:
                   value: http://sonarr.media.svc.cluster.local:8989
                 - name: UN_SONARR_0_API_KEY
                   value: ${SONARR_KEY}
-
+      portal:
+        open:
+          enabled: true
+      ingress:
+        main:
+          enabled: true
+          hosts:
+            - host: unpackerr.${DOMAIN_0}
+          tls:
+            - hosts:
+                - unpackerr.${DOMAIN_0}
+              secretName: unpackerr-talos4-tls
+          integrations:
+            certManager:
+              enabled: true
+              certificateIssuer: domain-0-le-prod
 
 
 
