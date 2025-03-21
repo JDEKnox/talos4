@@ -75,20 +75,20 @@ spec:
                   value: ${SONARR_KEY}
       portal:
         open:
-          enabled: true
-      ingress:
-        main:
-          enabled: true
-          hosts:
-            - host: unpackerr.${DOMAIN_0}
-          tls:
-            - hosts:
-                - unpackerr.${DOMAIN_0}
-              secretName: unpackerr-talos4-tls
-          integrations:
-            certManager:
-              enabled: true
-              certificateIssuer: domain-0-le-prod
+          enabled: false
+      # ingress:
+      #   main:
+      #     enabled: true
+      #     hosts:
+      #       - host: unpackerr.${DOMAIN_0}
+      #     tls:
+      #       - hosts:
+      #           - unpackerr.${DOMAIN_0}
+      #         secretName: unpackerr-talos4-tls
+      #     integrations:
+      #       certManager:
+      #         enabled: true
+      #         certificateIssuer: domain-0-le-prod
 
 
 
