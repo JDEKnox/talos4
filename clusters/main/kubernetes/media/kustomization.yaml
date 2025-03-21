@@ -9,3 +9,4 @@ resources:
   - tautulli/ks.yaml
   - namespace.yaml
   - qbittorrent/ks.yaml
+  - unpackerr/ks.yaml
