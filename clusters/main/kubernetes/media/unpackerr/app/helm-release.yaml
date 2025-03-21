@@ -1,183 +1,266 @@
----
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: unpackerr
-  namespace: media
+    name: unpackerr
+    namespace: media
 spec:
-  interval: 15m
-  chart:
-    spec:
-      chart: unpackerr
-      version: 15.6.1
-      sourceRef:
-        kind: HelmRepository
-        name: truecharts
-        namespace: flux-system
-      interval: 15m
-  timeout: 20m
-  maxHistory: 3
-  driftDetection:
-    mode: warn
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
-  values:
-    credentials:
-      s3v2:
-        type: s3
-        url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
-        bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
-        accessKey: "${S3_MINIO_KEY_ID}"
-        secretKey: "${S3_MINIO_SECRET_KEY}"
-        encrKey: "${S3_MINIO_SECRET_KEY}"
-      # s3v2:
-      #   type: s3
-      #   url: "${S3_URL}" #"https://s3.amazonaws.com"
-      #   bucket: "${S3_BUCKET_PREFIX}-{{ .Chart.Name }}"
-      #   accessKey: "${S3_KEY_ID}"
-      #   secretKey: "${S3_SECRET_KEY}"
-      #   encrKey: "${S3_SECRET_KEY}"
-    # workload:
-    #   main:
-    #     podSpec:
-    #       containers:
-    #         main:
-    #           probes:
-    #             readiness:
-    #               enabled: true
-    #               type: http
-    #               path: /ping
-    #             liveness:
-    #               enabled: true
-    #               type: http
-    #               path: /ping
-    #             startup:
-    #               enabled: true
-    #               type: http
-    #               path: /ping
-    #           env:
-    #             RADARR__SERVER__PORT: "{{ .Values.service.main.ports.main.port }}"
-    #             # External | Basic | Forms
-    #             RADARR__AUTH__METHOD: ""
-    #             # DisabledForLocalAddresses | Enabled
-    #             RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
-    #             # RADARR__APP__THEME: dark
-    #             # RADARR__APP__INSTANCENAME: Radarr
-    #             # RADARR__LOG__LEVEL: info
-    #             # RADARR__UPDATE__BRANCH: develop
-    #         exportarr:
-    #           enabled: "{{ .Values.metrics.main.enabled }}"
-    #           imageSelector: exportarrImage
-    #           args:
-    #             - radarr
-    #           probes:
-    #             liveness:
-    #               enabled: true
-    #               type: http
-    #               path: /healthz
-    #               port: "{{ .Values.service.metrics.ports.metrics.port }}"
-    #             readiness:
-    #               enabled: true
-    #               type: http
-    #               path: /healthz
-    #               port: "{{ .Values.service.metrics.ports.metrics.port }}"
-    #             startup:
-    #               enabled: true
-    #               type: http
-    #               path: /healthz
-    #               port: "{{ .Values.service.metrics.ports.metrics.port }}"
-    #           env:
-    #             INTERFACE: 0.0.0.0
-    #             PORT: "{{ .Values.service.metrics.ports.metrics.port }}"
-    #             URL: '{{ printf "http://%v:%v" (include "tc.v1.common.lib.chart.names.fullname" $) .Values.service.main.ports.main.port }}'
-    #             # additional metrics (slow)
-    #             # ENABLE_ADDITIONAL_METRICS: false
-    #             # enable gathering unknown queue items
-    #             # ENABLE_UNKNOWN_QUEUE_ITEMS: false
-    #             CONFIG: "/config/config.xml"
-    persistence:
-      # config:
-      #   volsync:
-      #   - name: config
-      #     type: restic
-      #     cleanupTempPVC: true
-      #     cleanupCachePVC: true
-      #     credentials: s3v2
-      #     dest:
-      #       enabled: true
-      #     src:
-      #       enabled: true
-      #       trigger:
-      #         schedule: 10 * * * *
-      config:
-        volsync:
-          - name: config
-            type: restic
-            credentials: s3v2
-            dest:
-              enabled: true
-            src:
-              enabled: true
-      # config:
-      #   enabled: true
-      #   targetSelector:
-      #     main:
-      #       main:
-      #         mountPath: /config
-      #       exportarr:
-      #         mountPath: /config
-      #         readOnly: true
-      plex-media:
-        enabled: true
-        existingClaim: plex-media-pvc
-        mountPath: /mnt
-    portal:
-      open:
-        enabled: true
-    ingress:
-      main:
-        enabled: true
-        hosts:
-          - host: unpackerr.${DOMAIN_0}
-        tls:
-          - hosts:
-              - unpackerr.${DOMAIN_0}
-            secretName: unpackerr-talos4-tls
-        integrations:
-          certManager:
-            enabled: true
-            certificateIssuer: domain-0-le-prod
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: unpackerr
+            version: 15.6.1
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    values:
+      portal:
+        open:
+          enabled: false
+      global:
+        stopAll: false
+      credentials:
+        s3v2:
+          type: s3
+          url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
+          bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
+          accessKey: "${S3_MINIO_KEY_ID}"
+          secretKey: "${S3_MINIO_SECRET_KEY}"
+          encrKey: "${S3_MINIO_SECRET_KEY}"
+      persistence:
+        config:
+          volsync:
+            - name: config
+              type: restic
+              credentials: s3v2
+              dest:
+                enabled: true
+              src:
+                enabled: true
+        downloads:
+          volsync:
+            - name: downloads
+              type: restic
+              credentials: s3v2
+              dest:
+                enabled: true
+              src:
+                enabled: true
+        plex-media:
+          enabled: true
+          existingClaim: plex-media-pvc
+          mountPath: /mnt
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                advanced: false
+                envList:
+                - name: UN_RADARR_0_URL
+                  value: http://radarr.media.svc.cluster.local:7878
+                - name: UN_RADARR_0_API_KEY
+                  value: ${RADARR_KEY}
+                - name: UN_SONARR_0_URL
+                  value: http://sonarr.media.svc.cluster.local:8989
+                - name: UN_SONARR_0_API_KEY
+                  value: ${SONARR_KEY}
 
-    #### CodeServer Section
-    # addons:
-    #       codeserver:
-    #         # -- Enable running a code-server container in the pod
-    #         enabled: true
 
-    #         service:
-    #         # -- Enable a service for the code-server add-on.
-    #             type: ClusterIP
-    # #            loadBalancerIP: "192.168.178.11"
-    #             # Specify the default port information
-    #             ports:
-    #                 codeserver:
-    #                   port: 12321
 
-    #         ingress:
-    #           # -- Enable an ingress for the code-server add-on.
-    #           enabled: true
-    #           integrations:
-    #             certManager:
-    #               enabled: true
-    #               certificateIssuer: domain-0-le-prod
-    #           hosts:
-    #             - host: radarr.codeserver.${DOMAIN_0}
+
+
+# ---
+# # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+# apiVersion: helm.toolkit.fluxcd.io/v2beta2
+# kind: HelmRelease
+# metadata:
+#   name: unpackerr
+#   namespace: media
+# spec:
+#   interval: 15m
+#   chart:
+#     spec:
+#       chart: unpackerr
+#       version: 15.6.1
+#       sourceRef:
+#         kind: HelmRepository
+#         name: truecharts
+#         namespace: flux-system
+#       interval: 15m
+#   timeout: 20m
+#   maxHistory: 3
+#   driftDetection:
+#     mode: warn
+#   install:
+#     createNamespace: true
+#     remediation:
+#       retries: 3
+#   upgrade:
+#     cleanupOnFail: true
+#     remediation:
+#       retries: 3
+#   uninstall:
+#     keepHistory: false
+#   values:
+#     credentials:
+#       s3v2:
+#         type: s3
+#         url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
+#         bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
+#         accessKey: "${S3_MINIO_KEY_ID}"
+#         secretKey: "${S3_MINIO_SECRET_KEY}"
+#         encrKey: "${S3_MINIO_SECRET_KEY}"
+#       # s3v2:
+#       #   type: s3
+#       #   url: "${S3_URL}" #"https://s3.amazonaws.com"
+#       #   bucket: "${S3_BUCKET_PREFIX}-{{ .Chart.Name }}"
+#       #   accessKey: "${S3_KEY_ID}"
+#       #   secretKey: "${S3_SECRET_KEY}"
+#       #   encrKey: "${S3_SECRET_KEY}"
+#     # workload:
+#     #   main:
+#     #     podSpec:
+#     #       containers:
+#     #         main:
+#     #           probes:
+#     #             readiness:
+#     #               enabled: true
+#     #               type: http
+#     #               path: /ping
+#     #             liveness:
+#     #               enabled: true
+#     #               type: http
+#     #               path: /ping
+#     #             startup:
+#     #               enabled: true
+#     #               type: http
+#     #               path: /ping
+#     #           env:
+#     #             RADARR__SERVER__PORT: "{{ .Values.service.main.ports.main.port }}"
+#     #             # External | Basic | Forms
+#     #             RADARR__AUTH__METHOD: ""
+#     #             # DisabledForLocalAddresses | Enabled
+#     #             RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+#     #             # RADARR__APP__THEME: dark
+#     #             # RADARR__APP__INSTANCENAME: Radarr
+#     #             # RADARR__LOG__LEVEL: info
+#     #             # RADARR__UPDATE__BRANCH: develop
+#     #         exportarr:
+#     #           enabled: "{{ .Values.metrics.main.enabled }}"
+#     #           imageSelector: exportarrImage
+#     #           args:
+#     #             - radarr
+#     #           probes:
+#     #             liveness:
+#     #               enabled: true
+#     #               type: http
+#     #               path: /healthz
+#     #               port: "{{ .Values.service.metrics.ports.metrics.port }}"
+#     #             readiness:
+#     #               enabled: true
+#     #               type: http
+#     #               path: /healthz
+#     #               port: "{{ .Values.service.metrics.ports.metrics.port }}"
+#     #             startup:
+#     #               enabled: true
+#     #               type: http
+#     #               path: /healthz
+#     #               port: "{{ .Values.service.metrics.ports.metrics.port }}"
+#     #           env:
+#     #             INTERFACE: 0.0.0.0
+#     #             PORT: "{{ .Values.service.metrics.ports.metrics.port }}"
+#     #             URL: '{{ printf "http://%v:%v" (include "tc.v1.common.lib.chart.names.fullname" $) .Values.service.main.ports.main.port }}'
+#     #             # additional metrics (slow)
+#     #             # ENABLE_ADDITIONAL_METRICS: false
+#     #             # enable gathering unknown queue items
+#     #             # ENABLE_UNKNOWN_QUEUE_ITEMS: false
+#     #             CONFIG: "/config/config.xml"
+#     persistence:
+#       # config:
+#       #   volsync:
+#       #   - name: config
+#       #     type: restic
+#       #     cleanupTempPVC: true
+#       #     cleanupCachePVC: true
+#       #     credentials: s3v2
+#       #     dest:
+#       #       enabled: true
+#       #     src:
+#       #       enabled: true
+#       #       trigger:
+#       #         schedule: 10 * * * *
+#       config:
+#         volsync:
+#           - name: config
+#             type: restic
+#             credentials: s3v2
+#             dest:
+#               enabled: true
+#             src:
+#               enabled: true
+#       # config:
+#       #   enabled: true
+#       #   targetSelector:
+#       #     main:
+#       #       main:
+#       #         mountPath: /config
+#       #       exportarr:
+#       #         mountPath: /config
+#       #         readOnly: true
+#       plex-media:
+#         enabled: true
+#         existingClaim: plex-media-pvc
+#         mountPath: /mnt
+#     portal:
+#       open:
+#         enabled: true
+#     ingress:
+#       main:
+#         enabled: true
+#         hosts:
+#           - host: unpackerr.${DOMAIN_0}
+#         tls:
+#           - hosts:
+#               - unpackerr.${DOMAIN_0}
+#             secretName: unpackerr-talos4-tls
+#         integrations:
+#           certManager:
+#             enabled: true
+#             certificateIssuer: domain-0-le-prod
+
+#     #### CodeServer Section
+#     # addons:
+#     #       codeserver:
+#     #         # -- Enable running a code-server container in the pod
+#     #         enabled: true
+
+#     #         service:
+#     #         # -- Enable a service for the code-server add-on.
+#     #             type: ClusterIP
+#     # #            loadBalancerIP: "192.168.178.11"
+#     #             # Specify the default port information
+#     #             ports:
+#     #                 codeserver:
+#     #                   port: 12321
+
+#     #         ingress:
+#     #           # -- Enable an ingress for the code-server add-on.
+#     #           enabled: true
+#     #           integrations:
+#     #             certManager:
+#     #               enabled: true
+#     #               certificateIssuer: domain-0-le-prod
+#     #           hosts:
+#     #             - host: radarr.codeserver.${DOMAIN_0}
