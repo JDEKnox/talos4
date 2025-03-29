@@ -10,3 +10,4 @@ resources:
   - namespace.yaml
   - qbittorrent/ks.yaml
   - unpackerr/ks.yaml
+  - threadfin/ks.yaml
