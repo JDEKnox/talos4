@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: qb4
+  name: qb2
   namespace: media
 spec:
   interval: 15m
@@ -21,7 +21,7 @@ spec:
         - target:
             version: v1
             kind: Deployment
-            name: qb4
+            name: qb2
           patch: |
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
@@ -104,7 +104,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: qb4.${DOMAIN_0}
+          - host: qb2.${DOMAIN_0}
         integrations:
           certManager:
             enabled: true
