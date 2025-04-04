@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: qbittorrent
+  name: qb2
   namespace: media
 spec:
   interval: 15m
@@ -21,7 +21,7 @@ spec:
         - target:
             version: v1
             kind: Deployment
-            name: qbittorrent
+            name: qb2
           patch: |
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
@@ -84,27 +84,26 @@ spec:
         - 192.168.0.0/16
         env:
           VPN_TYPE: wireguard
-          VPN_SERVICE_PROVIDER: protonvpn
-          WIREGUARD_PRIVATE_KEY: ${WG_PRIVATE_KEY}
+          VPN_SERVICE_PROVIDER: custom
+          # WIREGUARD_PRIVATE_KEY: ${WG_PRIVATE_KEY}
           HTTPPROXY: "on"
           FIREWALL_INPUT_PORTS: 10095,8888
-          SERVER_COUNTRIES: ${SERVER_COUNTRIES}
+          # SERVER_COUNTRIES: ${SERVER_COUNTRIES}
           HTTPPROXY_LOG: "on"
           HTTPPROXY_LISTENING_ADDRESS: :8888
           VPN_PORT_FORWARDING: "on"
           PORT_FORWARD_ONLY: "on"
-          # WIREGUARD_ENDPOINT_IP: is.privacy.network:1337
-          # WIREGUARD_ENDPOINT_PORT: the server endpoint port
-          # WIREGUARD_PUBLIC_KEY: is the server 32 bytes public key in base64 format.
-          # WIREGUARD_PRIVATE_KEY: is your 32 bytes private key in base64 format.
-          # WIREGUARD_ADDRESSES: is your IP network interface address in the format xx.xx.xx.xx/xx.
-          # WIREGUARD_PRESHARED_KEY: is your 32 bytes pre-shared key in base64 format. This is often optional and can be left unset.
+          WIREGUARD_ENDPOINT_IP: ${WIREGUARD_ENDPOINT_IP}
+          WIREGUARD_ENDPOINT_PORT: ${WIREGUARD_ENDPOINT_PORT}
+          WIREGUARD_PUBLIC_KEY: ${WIREGUARD_PUBLIC_KEY}
+          WIREGUARD_PRIVATE_KEY: ${WIREGUARD_PRIVATE_KEY}
+
 
     ingress:
       main:
         enabled: true
         hosts:
-          - host: qbittorrent.${DOMAIN_0}
+          - host: qb2.${DOMAIN_0}
         integrations:
           certManager:
             enabled: true
@@ -112,7 +111,7 @@ spec:
     persistence:
       config:
         volsync:
-          - name: config2
+          - name: config
             type: restic
             credentials: s3v2
             dest:
