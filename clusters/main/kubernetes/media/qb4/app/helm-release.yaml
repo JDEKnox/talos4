@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: qb3
+  name: qb4
   namespace: media
 spec:
   interval: 15m
@@ -21,7 +21,7 @@ spec:
         - target:
             version: v1
             kind: Deployment
-            name: qb3
+            name: qb4
           patch: |
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
@@ -93,18 +93,18 @@ spec:
           HTTPPROXY_LISTENING_ADDRESS: :8888
           VPN_PORT_FORWARDING: "on"
           PORT_FORWARD_ONLY: "on"
-          # WIREGUARD_ENDPOINT_IP: ${WIREGUARD_ENDPOINT_IP}
+          WIREGUARD_ENDPOINT_IP: ${WIREGUARD_ENDPOINT_IP}
           WIREGUARD_ENDPOINT_PORT: ${WIREGUARD_ENDPOINT_PORT}
           WIREGUARD_PUBLIC_KEY: ${WIREGUARD_PUBLIC_KEY}
           WIREGUARD_PRIVATE_KEY: ${WIREGUARD_PRIVATE_KEY}
-          SERVER_HOSTNAMES: ${SERVER_HOSTNAMES}
+          #SERVER_HOSTNAMES: ${SERVER_HOSTNAMES}
 
 
     ingress:
       main:
         enabled: true
         hosts:
-          - host: qb3.${DOMAIN_0}
+          - host: qb4.${DOMAIN_0}
         integrations:
           certManager:
             enabled: true
