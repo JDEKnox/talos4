@@ -10,5 +10,5 @@ resources:
   - namespace.yaml
   - qbittorrent/ks.yaml
   - unpackerr/ks.yaml
-  - threadfin/ks.yaml  - qb5
-  - qb5/ks.yaml
+  - threadfin/ks.yaml  - qb6
+  - qb6/ks.yaml
