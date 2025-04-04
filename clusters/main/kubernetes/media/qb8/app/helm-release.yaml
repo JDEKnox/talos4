@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: qb7
+  name: qb8
   namespace: media
 spec:
   interval: 15m
@@ -21,7 +21,7 @@ spec:
         - target:
             version: v1
             kind: Deployment
-            name: qb7
+            name: qb8
           patch: |
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
@@ -92,6 +92,8 @@ spec:
           HTTPPROXY_LOG: "on"
           HTTPPROXY_LISTENING_ADDRESS: :8888
           VPN_PORT_FORWARDING_PROVIDER: ${VPN_PORT_FORWARDING_PROVIDER}
+          VPN_PORT_FORWARDING_USERNAME: ${VPN_PORT_FORWARDING_USERNAME}
+          VPN_PORT_FORWARDING_PASSWORD: ${VPN_PORT_FORWARDING_PASSWORD}
           SERVER_NAMES: ${SERVER_NAMES}
           VPN_PORT_FORWARDING: "on"
           # PORT_FORWARD_ONLY: "on"
@@ -107,7 +109,7 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: qb7.${DOMAIN_0}
+          - host: qb8.${DOMAIN_0}
         integrations:
           certManager:
             enabled: true
