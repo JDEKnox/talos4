@@ -1,0 +1,125 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: qb4
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: qbittorrent
+      version: 22.4.5
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  postRenderers:
+  - kustomize:
+      patches:
+        - target:
+            version: v1
+            kind: Deployment
+            name: qb4
+          patch: |
+            - op: add
+              path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
+              value: 1
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    credentials:
+      s3v2:
+        type: s3
+        url: "${S3_MINIO_URL}" #"https://s3.amazonaws.com"
+        bucket: "${S3_MINIO_BUCKET_PREFIX}-{{ .Chart.Name }}"
+        accessKey: "${S3_MINIO_KEY_ID}"
+        secretKey: "${S3_MINIO_SECRET_KEY}"
+        encrKey: "${S3_MINIO_SECRET_KEY}"
+    # service:
+    #   proxy:
+    #     enabled: true
+    #     ports:
+    #       gluetun:
+    #         enabled: true
+    #         port: 8888
+    #         protocol: "http"
+    #         targetPort: 8888
+    # workload:
+    #   qbitportforward:
+    #     enabled: true
+    #     # QBT_USERNAME: "${ADMIN}"
+    #     # QBT_PASSWORD: "${ADMIN_PASSWORD}"
+
+    qbitportforward:
+      enabled: true
+      # QBT_ADDR: ${QBT_ADDR}
+      # QBT_USERNAME: ${QB_ADMIN}
+      # QBT_PASSWORD: ${QB_ADMIN_PASSWORD}
+    service:
+      proxy:
+        enabled: true
+        ports:
+          proxy:
+            enabled: true
+            port: 8888
+            protocol: "http"
+            targetPort: 8888
+    addons:
+      vpn:
+        type: gluetun
+        killSwitch: true
+        excludedNetworks_IPv4:
+        - 192.168.0.0/16
+        env:
+          VPN_TYPE: wireguard
+          VPN_SERVICE_PROVIDER: custom
+          # WIREGUARD_PRIVATE_KEY: ${WG_PRIVATE_KEY}
+          HTTPPROXY: "on"
+          FIREWALL_INPUT_PORTS: 10095,8888
+          # SERVER_COUNTRIES: ${SERVER_COUNTRIES}
+          HTTPPROXY_LOG: "on"
+          HTTPPROXY_LISTENING_ADDRESS: :8888
+          VPN_PORT_FORWARDING: "on"
+          # PORT_FORWARD_ONLY: "on"
+          WIREGUARD_ENDPOINT_IP: ${WIREGUARD_ENDPOINT_IP}
+          WIREGUARD_ENDPOINT_PORT: ${WIREGUARD_ENDPOINT_PORT}
+          WIREGUARD_PUBLIC_KEY: ${WIREGUARD_PUBLIC_KEY}
+          WIREGUARD_PRIVATE_KEY: ${WIREGUARD_PRIVATE_KEY}
+          #SERVER_HOSTNAMES: ${SERVER_HOSTNAMES}
+
+
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: qb4.${DOMAIN_0}
+        integrations:
+          certManager:
+            enabled: true
+            certificateIssuer: domain-0-le-prod
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3v2
+            dest:
+              enabled: true
+            src:
+              enabled: true
+      plex-media:
+        enabled: true
+        existingClaim: plex-media-pvc
+        mountPath: /mnt
