@@ -85,12 +85,6 @@ spec:
     addons:
       vpn:
         type: gluetun
-        postStart:
-          exec:
-            command:
-              - "/bin/sh"
-              - "-c"
-              - "(ip rule del table 51820; ip -6 rule del table 51820) || true"
         killSwitch: true
         excludedNetworks_IPv4:
         - 192.168.0.0/16
