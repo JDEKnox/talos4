@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: qb8
+  name: qb9
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/media/qb8/app
+  path: clusters/main/kubernetes/media/qb9/app
   prune: true
   sourceRef:
     kind: GitRepository
