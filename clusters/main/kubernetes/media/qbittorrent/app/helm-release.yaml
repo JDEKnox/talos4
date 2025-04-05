@@ -22,7 +22,7 @@ spec:
             version: v1
             kind: Deployment
             name: qbittorrent
-          patch: |
+          patch:
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
               value: 1
