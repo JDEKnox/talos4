@@ -17,7 +17,7 @@ spec:
       interval: 15m
   postRenderers:
   - kustomize:
-      patches:
+      patches: |
         - target:
             version: v1
             kind: Deployment
