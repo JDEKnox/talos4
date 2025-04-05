@@ -26,6 +26,9 @@ spec:
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
               value: 1
+            - op: add
+              path: /spec/strategy/type
+              value: "recreate"
             - op: add # Adds the 'lifecycle' object if it doesn't exist
               path: /spec/template/spec/containers/1/lifecycle
               value:
