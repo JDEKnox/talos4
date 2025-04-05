@@ -34,7 +34,7 @@ spec:
                     command:
                       - "/bin/sh"
                       - "-c"
-                      - "(ip -6 rule del table 51820) || true"
+                      - "(ip -6 rule del table 51820; ip rule del table 51820) || true"
   timeout: 20m
   maxHistory: 3
   install:
