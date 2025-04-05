@@ -26,9 +26,12 @@ spec:
             - op: add
               path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
               value: 1
-            - op: add
+            - op: add # Or potentially 'replace' if the path exists but needs changing
               path: /spec/template/spec/containers/1/lifecycle/postStart/exec/command
-              value: "/bin/sh -c (ip rule del table 51820; ip -6 rule del table 51820) || true"
+              value:
+                - "/bin/sh"
+                - "-c"
+                - "(ip rule del table 51820; ip -6 rule del table 51820) || true"
   timeout: 20m
   maxHistory: 3
   install:
@@ -152,3 +155,6 @@ spec:
 
 
 # args: '["-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]'
+            # - op: add
+            #   path: /spec/template/spec/containers/1/lifecycle/postStart/exec/command
+            #   value: "/bin/sh -c (ip rule del table 51820; ip -6 rule del table 51820) || true"
