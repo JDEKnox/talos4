@@ -34,7 +34,16 @@ spec:
                     command:
                       - "/bin/sh"
                       - "-c"
-                      - "(ip rule del table 51820 && ip -6 rule del table 51820) || true"
+                      - "(ip -6 rule del table 51820) || true"
+            - op: add # Adds the 'lifecycle' object if it doesn't exist
+              path: /spec/template/spec/containers/1/lifecycle
+              value:
+                postStart:
+                  exec:
+                    command:
+                      - "/bin/sh"
+                      - "-c"
+                      - "(ip rule del table 51820) || true"
   timeout: 20m
   maxHistory: 3
   install:
