@@ -78,10 +78,6 @@ spec:
             targetPort: 8888
     addons:
       vpn:
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
         type: gluetun
         killSwitch: true
         excludedNetworks_IPv4:
@@ -119,6 +115,14 @@ spec:
           # PORT_FORWARD_ONLY: "on"
           # SERVER_COUNTRIES: ${SERVER_COUNTRIES}
           # WIREGUARD_PRIVATE_KEY: ${WG_PRIVATE_KEY}
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - "/bin/sh"
+                - "-c"
+                - "(ip rule del table 51820; ip -6 rule del table 51820) || true"
+
 
 
     ingress:
