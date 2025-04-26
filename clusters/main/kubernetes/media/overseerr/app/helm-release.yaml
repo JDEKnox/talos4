@@ -52,7 +52,7 @@ spec:
           containers:
             main:
               env:
-                LOG_LEVEL: info
+                LOG_LEVEL: debug
     ingress:
       main:
         enabled: true
