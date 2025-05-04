@@ -91,14 +91,17 @@ spec:
                 pathType: Prefix
     persistence:
       config:
-        volsync:
-          - name: config
-            type: restic
-            credentials: s3v2
-            dest:
-              enabled: true
-            src:
-              enabled: true
+        enabled: true
+        mountPath: "/config"
+      # config:
+      #   volsync:
+      #     - name: config
+      #       type: restic
+      #       credentials: s3v2
+      #       dest:
+      #         enabled: true
+      #       src:
+      #         enabled: true
       plex-media:
         enabled: true
         existingClaim: plex-media-pvc
