@@ -55,6 +55,14 @@ spec:
         ports:
           main:
             port: 10095
+      proxy:
+        enabled: true
+        ports:
+          proxy:
+            enabled: true
+            port: 8888
+            protocol: "http"
+            targetPort: 8888
     workload:
       main:
         podSpec:
@@ -67,12 +75,12 @@ spec:
                 VPN_PROV: "pia"
                 VPN_CLIENT: "wireguard"
                 STRICT_PORT_FORWARD: "yes"
-                ENABLE_PRIVOXY: "no"
-                LAN_NETWORK: "192.168.0.0/16,172.16.0.0/16"
+                ENABLE_PRIVOXY: "yes"
+                LAN_NETWORK: "192.168.0.0/16,172.16.0.0/16,172.17.0.0/16"
                 NAME_SERVERS: "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1"
                 VPN_INPUT_PORTS: "6881"
                 VPN_OUTPUT_PORTS: "6881"
-                DEBUG: "true"
+                DEBUG: "false"
                 WEBUI_PORT: "{{ .Values.service.main.ports.main.port }}"
     ingress:
       main:
