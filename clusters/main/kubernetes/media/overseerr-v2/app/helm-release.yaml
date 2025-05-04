@@ -75,9 +75,9 @@ spec:
       #         schedule: 10 * * * *
       config:
         volsync:
-          - name: config1
+          - name: config
             type: restic
-            credentials: s3v2
+            credentials: s3v3
             dest:
               enabled: true
             src:
