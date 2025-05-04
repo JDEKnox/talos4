@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: overseerr
+  name: overseerr-v2
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/media/overseerr/app
+  path: clusters/main/kubernetes/media/overseerr-v2/app
   prune: true
   sourceRef:
     kind: GitRepository
