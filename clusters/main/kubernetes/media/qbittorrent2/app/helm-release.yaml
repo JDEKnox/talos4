@@ -60,9 +60,9 @@ spec:
         ports:
           proxy:
             enabled: true
-            port: 8888
+            port: 8118
             protocol: "http"
-            targetPort: 8888
+            targetPort: 8118
     workload:
       main:
         podSpec:
