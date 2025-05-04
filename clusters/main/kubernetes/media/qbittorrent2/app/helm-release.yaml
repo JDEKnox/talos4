@@ -55,14 +55,14 @@ spec:
         ports:
           main:
             port: 10095
-      proxy:
-        enabled: true
-        ports:
-          proxy:
-            enabled: true
-            port: 8118
-            protocol: "http"
-            targetPort: 8118
+      # proxy:
+      #   enabled: true
+      #   ports:
+      #     proxy:
+      #       enabled: true
+      #       port: 8118
+      #       protocol: "http"
+      #       targetPort: 8118
     workload:
       main:
         podSpec:
