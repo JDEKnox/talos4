@@ -82,7 +82,7 @@ spec:
       #         schedule: 10 * * * *
       config:
         volsync:
-          - name: config1
+          - name: config2
             type: restic
             credentials: s3v2
             dest:
