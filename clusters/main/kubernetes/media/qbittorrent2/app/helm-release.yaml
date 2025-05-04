@@ -72,7 +72,7 @@ spec:
                 NAME_SERVERS: "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1"
                 VPN_INPUT_PORTS: "6881"
                 VPN_OUTPUT_PORTS: "6881"
-                DEBUG: "false"
+                DEBUG: "true"
                 WEBUI_PORT: "{{ .Values.service.main.ports.main.port }}"
     ingress:
       main:
