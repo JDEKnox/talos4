@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: overseerr
-      version: 15.6.0
+      version: 15.5.1
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -82,7 +82,7 @@ spec:
       #         schedule: 10 * * * *
       config:
         volsync:
-          - name: config2
+          - name: config1
             type: restic
             credentials: s3v2
             dest:
