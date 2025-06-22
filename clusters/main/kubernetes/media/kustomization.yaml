@@ -5,7 +5,6 @@ resources:
   - radarr/ks.yaml
   - tautulli/ks.yaml
   - namespace.yaml
-  - qbittorrent/ks.yaml
   - unpackerr/ks.yaml
   - qbittorrent2/ks.yaml
   - overseerr/ks.yaml
