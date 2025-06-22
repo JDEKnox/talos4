@@ -2,13 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - pvc.yaml
-  - prowlarr/ks.yaml
   - radarr/ks.yaml
   - tautulli/ks.yaml
   - namespace.yaml
   - qbittorrent/ks.yaml
   - unpackerr/ks.yaml
-  - threadfin/ks.yaml
   - qbittorrent2/ks.yaml
   - overseerr/ks.yaml
   - sonarr/ks.yaml
