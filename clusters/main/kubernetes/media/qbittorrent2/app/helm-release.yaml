@@ -131,7 +131,9 @@ spec:
       #   mountPath: "/config"
       config:
         enabled: true
+        type: pvc
         mountPath: /config
+        targetSelectAll: true
         volsync:
           - name: config
             type: restic
@@ -140,6 +142,19 @@ spec:
               enabled: true
             src:
               enabled: true
+  #  enabled: true
+  #  type: pvc
+  #  mountPath: /backedup
+  #  targetSelectAll: true
+  #  volsync:
+  #    - name: mybackup
+  #      ## TODO: other options
+  #      type: restic
+  #      credentials: mys3
+  #      dest:
+  #        enabled: true
+  #      src:
+  #        enabled: true
       plex-media:
         enabled: true
         existingClaim: plex-media-pvc
