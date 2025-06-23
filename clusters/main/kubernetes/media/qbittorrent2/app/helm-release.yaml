@@ -130,6 +130,7 @@ spec:
       #   enabled: true
       #   mountPath: "/config"
       config:
+        enabled: true
         volsync:
           - name: config
             type: restic
