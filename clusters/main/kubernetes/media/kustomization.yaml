@@ -6,7 +6,6 @@ resources:
   - tautulli/ks.yaml
   - namespace.yaml
   - unpackerr/ks.yaml
-  - qbittorrent2/ks.yaml
   - overseerr/ks.yaml
   - sonarr/ks.yaml
   - prowlarr/ks.yaml
