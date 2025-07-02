@@ -11,4 +11,4 @@ resources:
   - prowlarr/ks.yaml
   - threadfin/ks.yaml
   - qbittorrent/ks.yaml
-  - qbittorrent2/ks.yaml
+
